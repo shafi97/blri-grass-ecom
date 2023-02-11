@@ -192,8 +192,7 @@
                                                                     @auth
                                                                         <a href="javascript:;" title="Add to Cart"
                                                                             {{-- data-toggle="modal"
-                                                                            data-target="#add_to_cart_modal" --}}
-                                                                            class="addToCartView"
+                                                                            data-target="#add_to_cart_modal" --}} class="addToCartView"
                                                                             data-cart_product_name="{{ $discountProduct->name }}"
                                                                             data-cart_product_price="{{ number_format($discountProduct->price) }}"
                                                                             data-cart_product_dis_price="{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}"
@@ -350,19 +349,19 @@
     </div>
     <!-- CATEGORY AREA END -->
 
-        <!-- PRODUCT SLIDER AREA START -->
-        <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title-area ltn__section-title-2--- text-center">
-                            <h1 class="section-title">Special Offers</h1>
-                        </div>
+    <!-- PRODUCT SLIDER AREA START -->
+    <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h1 class="section-title">Special Offers</h1>
                     </div>
                 </div>
-                <div class="row ltn__product-slider-item-four-active slick-arrow-1">
-                    <!-- ltn__product-item -->
-                    @foreach ($discountProducts as $discountProduct)
+            </div>
+            <div class="row ltn__product-slider-item-four-active slick-arrow-1">
+                <!-- ltn__product-item -->
+                @foreach ($discountProducts as $discountProduct)
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-3 text-center">
                             <div class="product-img">
@@ -417,10 +416,10 @@
                     </div>
                 @endforeach
 
-                </div>
             </div>
         </div>
-        <!-- PRODUCT SLIDER AREA END -->
+    </div>
+    <!-- PRODUCT SLIDER AREA END -->
 
     <!-- CALL TO ACTION START (call-to-action-2) -->
     <div class="ltn__call-to-action-area call-to-action-2 pt-20 pb-20" data-bg="img/1.jpg--">

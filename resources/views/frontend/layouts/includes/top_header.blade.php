@@ -7,7 +7,8 @@
                 <div class="col-md-7">
                     <div class="ltn__top-bar-menu">
                         <ul>
-                            <li><a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i class="icon-mail"></i> info@webmail.com</a></li>
+                            <li><a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i
+                                        class="icon-mail"></i> info@webmail.com</a></li>
                             <li><a href="locations.html"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a></li>
                         </ul>
                     </div>
@@ -20,7 +21,8 @@
                                     <!-- ltn__language-menu -->
                                     <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
                                         <ul>
-                                            <li><a href="javascript:;" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
+                                            <li><a href="javascript:;" data-toggle="modal"
+                                                    data-target="#loginModal">Sign in</a></li>
                                             {{-- <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
                                                 <ul>
                                                     <li><a href="#">Arabic</a></li>
@@ -38,11 +40,15 @@
                                     <!-- ltn__social-media -->
                                     <div class="ltn__social-media">
                                         <ul>
-                                            <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                            </li>
+                                            <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                            </li>
 
-                                            <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                            <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
+                                            <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                            </li>
+                                            <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -77,8 +83,8 @@
                         </div>
                         <!-- header-search-2 -->
                         <div class="header-search-2">
-                            <form id="#123" method="get"  action="#">
-                                <input type="text" name="search" value="" placeholder="Search here..."/>
+                            <form id="#123" method="get" action="#">
+                                <input type="text" name="search" value="" placeholder="Search here..." />
                                 <button type="submit">
                                     <span><i class="icon-search"></i></span>
                                 </button>
@@ -94,7 +100,8 @@
                                 <!-- ltn__currency-menu -->
                                 <div class="ltn__drop-menu ltn__currency-menu">
                                     <ul>
-                                        <li><a href="#" class="dropdown-toggle"><span class="active-currency">USD</span></a>
+                                        <li><a href="#" class="dropdown-toggle"><span
+                                                    class="active-currency">USD</span></a>
                                             <ul>
                                                 <li><a href="login.html">USD - US Dollar</a></li>
                                                 <li><a href="wishlist.html">CAD - Canada Dollar</a></li>
@@ -119,8 +126,9 @@
                                         </div>
                                     </div>
                                     <div class="header-search-1-form">
-                                        <form id="#" method="get"  action="#">
-                                            <input type="text" name="search" value="" placeholder="Search here..."/>
+                                        <form id="#" method="get" action="#">
+                                            <input type="text" name="search" value=""
+                                                placeholder="Search here..." />
                                             <button type="submit">
                                                 <span><i class="icon-search"></i></span>
                                             </button>
@@ -135,7 +143,8 @@
                                         <li>
                                             <a href="#"><i class="icon-user"></i></a>
                                             <ul>
-                                                <li><a href="javascript:;" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
+                                                <li><a href="javascript:;" data-toggle="modal"
+                                                        data-target="#loginModal">Sign in</a></li>
                                                 <li><a href="register.html">Register</a></li>
                                                 <li><a href="account.html">My Account</a></li>
                                                 <li><a href="wishlist.html">Wishlist</a></li>
@@ -159,7 +168,8 @@
     </div>
     <!-- ltn__header-middle-area end -->
     <!-- header-bottom-area start -->
-    <div class="header-bottom-area ltn__border-top ltn__header-sticky  ltn__sticky-bg-white ltn__primary-bg--- section-bg-1 menu-color-white--- d-none d-lg-block">
+    <div
+        class="header-bottom-area ltn__border-top ltn__header-sticky  ltn__sticky-bg-white ltn__primary-bg--- section-bg-1 menu-color-white--- d-none d-lg-block">
         <div class="container">
             <div class="row">
                 <div class="col header-menu-column justify-content-center">
@@ -176,13 +186,15 @@
                                     <li class="menu-icon"><a href="#">Products</a>
                                         <ul>
                                             @foreach ($categories as $category)
-                                            <li><a href="#">{{ $category->name }} <span class="float-right"><i class="fa-solid fa-chevron-right"></i></span></a>
-                                                <ul>
-                                                    @foreach ($category->subCategories as $subCategory)
-                                                    <li><a href="cart.html">{{ $subCategory->name }}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
+                                                <li><a href="#">{{ $category->name }} <span
+                                                            class="float-right"><i
+                                                                class="fa-solid fa-chevron-right"></i></span></a>
+                                                    <ul>
+                                                        @foreach ($category->subCategories as $subCategory)
+                                                            <li><a href="cart.html">{{ $subCategory->name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </li>
