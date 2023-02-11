@@ -1,0 +1,52 @@
+/* Nav  */
+.sidebar-wrapper .metismenu a {
+    padding: 2px 2px;
+}
+
+.sidebar-wrapper .metismenu a .parent-icon {
+    font-size: 18px;
+}
+.sidebar-wrapper .metismenu ul a {
+    padding: 2px 15px 2px 15px;
+}
+
+.wrapper .page-content {
+    padding: 5px 1.5rem 1.5rem 1.5rem !important;
+}
+
+.required::after {
+    content: "*";
+    color: red;
+    font-weight: bold;
+}
+
+.index_title h6 {
+    margin-top: 10px;
+}
+
+.no-sort::after {
+    display: none!important;
+}
+.no-sort::before {
+    display: none!important;
+}
+
+.no-sort {
+    pointer-events: none!important;
+    cursor: default!important;
+}
+
+._btn {
+    border: none !important;
+    background: none;
+    font-size: 17px;
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1px !important;
+}
+
+.footer {
+    text-align: center !important;
+}
+
