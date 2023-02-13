@@ -65,9 +65,16 @@ class CartController extends Controller
 
     public function show()
     {
-        $datum = Cart::with(['product','product.file'])->whereUser_id(user()->id)->get();
+        $datum = Cart::with(['product'])->whereUser_id(user()->id)->get();
         $carts = view('frontend.layouts.includes.cart', ['datum' => $datum])->render();
         return response()->json(['status' => 'success', 'html' => $carts, 'carts']);
+    }
+
+    public function cartMenu()
+    {
+        $datum = Cart::with(['product','product.file'])->whereUser_id(user()->id)->get();
+        $cartMenus = view('frontend.layouts.includes.cart_menu', ['datum' => $datum])->render();
+        return response()->json(['status' => 'success', 'html' => $cartMenus, 'cartMenus']);
     }
 
     public function destroy(Request $request)

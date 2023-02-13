@@ -268,7 +268,8 @@
         }
 
         cartShow()
-        wishlistShow()
+        cartMenu()
+        // wishlistShow()
 
         function cartShow() {
             $.ajax({
@@ -277,6 +278,18 @@
                 success: function(res) {
                     if (res.status == 'success') {
                         $('#cart').html(res.html);
+                    }
+                }
+            });
+        }
+
+        function cartMenu() {
+            $.ajax({
+                url: '{{ route('frontend.cart.cartMenu') }}',
+                method: 'get',
+                success: function(res) {
+                    if (res.status == 'success') {
+                        $('#cartMenu').html(res.html);
                     }
                 }
             });
@@ -293,6 +306,7 @@
                 },
                 success: res => {
                     cartShow()
+                    cartMenu()
                     $('#add_to_cart_modal').modal('show')
                     // toast('success', res.message)
                 },
@@ -310,6 +324,7 @@
                 },
                 success: res => {
                     cartShow()
+                    cartMenu()
                     toast('success', res.message)
                 },
                 error: err => {}

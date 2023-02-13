@@ -1,12 +1,16 @@
 .modal-backdrop {
     z-index: 100000 !important;
-  }
+}
 
-  .modal {
+.modal {
     z-index: 100001 !important;
-  }
+}
 
-  input[type="text"], input[type="email"], input[type="password"], input[type="submit"], textarea {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"],
+textarea {
     height: 40px;
     margin-bottom: 10px;
     border-radius: 5px;
