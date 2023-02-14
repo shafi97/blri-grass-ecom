@@ -1,7 +1,5 @@
 @extends('frontend.layouts.app')
 @section('content')
-
-
     <!-- Shopping Cart -->
     <div class="shopping-cart section">
         <div class="container">
@@ -9,7 +7,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-12">
-                        <table id="myTable" class="table shopping-summery">
+                        <table id="myTable" class="table table-bordered shopping-summery">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -21,30 +19,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach ($carts as $cart)
                                     <input type="hidden" name="product_id[]" value="{{ $cart->product_id }}">
                                     <tr>
                                         <td>
-                                            <div class="product-img">
-                                                <div class="img-prdct">
-                                                    <img src="{{ imagePath('product', $cart->product->file->file) }}">
-                                                </div>
-                                            </div>
+                                            <img src="{{ imagePath('product', $cart->product->file->file) }}">
                                         </td>
                                         <td>
                                             <p>{{ $cart->product->name }}</p>
                                         </td>
                                         <td>
                                             <div class="button-container d-flex">
-                                                <button class="cart-qty-minus p-2" style="height: 40px" type="button" value="-"
-                                                    onclick="decrementStore(event, '{{ $cart->id }}')">
+                                                <button class="cart-qty-minus p-2" style="height: 40px" type="button"
+                                                    value="-" onclick="decrementStore(event, '{{ $cart->id }}')">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </button>
-                                                <input type="text" name="quantity"  min="1"
+                                                <input type="text" name="quantity" min="1"
                                                     class="qty form-control" value="{{ $cart->quantity }}" />
-                                                <button class="cart-qty-plus p-2" style="height: 40px" type="button" value="+"
-                                                    onclick="incrementStore(event, '{{ $cart->id }}')">
+                                                <button class="cart-qty-plus p-2" style="height: 40px" type="button"
+                                                    value="+" onclick="incrementStore(event, '{{ $cart->id }}')">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </button>
                                             </div>
@@ -57,7 +50,7 @@
                                             &#2547; <span id="amount"
                                                 class="amount">{{ $cart->quantity * $cart->product->price }}</span>
                                         </td>
-                                        <td class="action" data-title="Remove">
+                                        <td class="action text-center" data-title="Remove">
                                             <a href="{{ route('frontend.cart.delete', $cart->id) }}">
                                                 <i class="fa-solid fa-trash text-danger"></i>
                                             </a>
@@ -99,14 +92,14 @@
                                 <div class="col-lg-4 col-md-7 col-12">
                                     <div class="right">
                                         <ul>
-                                            <li>Cart Subtotal &#2547; <span id="total" class="total">0</span></li>
-                                            <li>Shipping<span>&#2547; 60</span></li>
+                                            <li>Cart Subtotal  <span id="total" class="total">0</span></li>
+                                            <li>Shipping<span> 60</span></li>
                                             {{-- <li>You Save<span>$20.00</span></li> --}}
-                                            <li class="last">You Pay<span class="totalPay">&#2547;</span></li>
+                                            <li class="last">You Pay<span class="totalPay"></span></li>
                                         </ul>
                                         <div class="button5">
-                                            <button type="submit" class="btn">Checkout</button>
-                                            <a href="{{ url()->previous() }}" class="btn">Continue shopping</a>
+                                            <button type="submit" class="btn btn-success">Checkout</button>
+                                            <a href="{{ url()->previous() }}" class="btn btn-primary">Continue shopping</a>
                                         </div>
                                     </div>
                                 </div>

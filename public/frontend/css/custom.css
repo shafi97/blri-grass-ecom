@@ -133,8 +133,9 @@ textarea {
 	margin-top: 20px;
 } */
 .shopping-summery tbody tr img {
-	border-radius: 0;
-	width: 80px;
+	border-radius: 2px;
+	/* width: 80px; */
+    width: auto;
 	height: 80px;
 }
 /* .shopping-summery tbody tr:last-child{
@@ -166,21 +167,18 @@ textarea {
 	-moz-transform:rotate(360deg);
 	transform:rotate(360deg);
 }
-.shopping-cart .border{
-
-}
 .shopping-cart .table .remove-icon{
 	font-size:16px;
 }
 .shopping-cart .table td {
 	vertical-align: middle;
 	border-top: 1px solid #eee;
-	padding: 30px;
+	padding: 8px;
 }
 .shopping-summery tbody .price {
 	text-align: center;
 }
-/* 
+/*
 .shopping-summery tbody .price span{}
 .shopping-cart tbody .qty .input-group {
 	width: 175px;
