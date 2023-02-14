@@ -66,7 +66,7 @@
             <div class="row">
                 <div class="col">
                     <div class="site-logo">
-                        <a href="index.html"><img src="{{ asset('frontend/img/logo.png') }}" alt="Logo"></a>
+                        <a href="{{ route('index') }}"><img src="{{ asset('frontend/img/logo.png') }}" alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col header-contact-serarch-column d-none d-lg-block">
@@ -161,7 +161,8 @@
                                             <i class="icon-shopping-cart"></i>
                                             <sup>0</sup>
                                         </span>
-                                        <h6><span>Your Cart</span> <span class="ltn__secondary-color">&#2547; 0</span></h6>
+                                        <h6><span>Your Cart</span> <span class="ltn__secondary-color">&#2547; 0</span>
+                                        </h6>
                                     </a>
                                 </div>
                             </li>
@@ -227,5 +228,3 @@
     </div>
 </div>
 <!-- Utilize Cart Menu End -->
-
-

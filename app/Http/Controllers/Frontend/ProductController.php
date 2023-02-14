@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function show($id)
     {
         // return user()->district_id;
-        $product = Product::with(['file'])->whereid($id)->first();
+        $product = Product::with(['file'])->whereId($id)->first();
 
         auth()->check() ?
         $cart = Cart::whereUser_id(user()->id)->whereProduct_id($id)->first() :

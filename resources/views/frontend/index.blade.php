@@ -166,7 +166,7 @@
                                             <div class="col-lg-12">
                                                 <div class="ltn__product-item ltn__product-item-3 text-center">
                                                     <div class="product-img">
-                                                        <a href="product-details.html"><img
+                                                        <a href="{{ route('product.show', $discountProduct->id) }}"><img
                                                                 src="{{ imagePath('product', $discountProduct->file->file) }}"
                                                                 alt="#"></a>
                                                         <div class="product-badge">

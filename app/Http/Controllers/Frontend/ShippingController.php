@@ -77,8 +77,8 @@ class ShippingController extends Controller
 
     public function shippingMulti(Request $request)
     {
-        $product_ids        = $request->session()->get('product_ids');
-        $products             = Product::whereIn('id', $product_ids)->get(['id', 'price', 'discount']);
+        $product_ids = $request->session()->get('product_ids');
+        $products    = Product::whereIn('id', $product_ids)->get(['id', 'price', 'discount']);
 
         $priceWithoutDiscount = $discount = $priceWithDiscount = 0;
         foreach($products as $k => $v){

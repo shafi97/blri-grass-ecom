@@ -23,7 +23,7 @@
         <h5>Subtotal: <span>&#2547; {{ number_format($totalPrice, 2)  }}</span></h5>
     </div>
     <div class="btn-wrapper">
-        <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+        <a href="{{ route('frontend.cart.index') }}" class="theme-btn-1 btn btn-effect-1">View Cart</a>
         <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
     </div>
 </div>
