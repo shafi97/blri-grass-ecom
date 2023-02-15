@@ -12,8 +12,8 @@ class WishlistController extends Controller
     public function index()
     {
         if(auth()->check()){
-            $carts = Wishlist::with(['product','product.file'])->whereUser_id(user()->id)->get();
-            return view('frontend.cart', compact('carts'));
+            $wishlists = Wishlist::with(['product','product.file'])->whereUser_id(user()->id)->get();
+            return view('frontend.wishlist', compact('wishlists'));
         }else{
             return redirect()->route('index');
         }
@@ -38,12 +38,12 @@ class WishlistController extends Controller
         }
     }
 
-    public function show()
-    {
-        $wishlists = Wishlist::with(['product','product.file'])->whereUser_id(user()->id)->get();
-        $wishlist = view('frontend.layout.includes.wishlist', ['wishlists' => $wishlists])->render();
-        return response()->json(['status' => 'success', 'html' => $wishlist, 'wishlist']);
-    }
+    // public function show()
+    // {
+    //     $wishlists = Wishlist::with(['product','product.file'])->whereUser_id(user()->id)->get();
+    //     $wishlist = view('frontend.layout.includes.wishlist', ['wishlists' => $wishlists])->render();
+    //     return response()->json(['status' => 'success', 'html' => $wishlist, 'wishlist']);
+    // }
 
     public function destroy(Request $request)
     {

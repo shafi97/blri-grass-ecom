@@ -191,29 +191,31 @@
                                                                 <li>
                                                                     @auth
                                                                         <a href="javascript:;" title="Add to Cart"
-                                                                            {{-- data-toggle="modal"
-                                                                            data-target="#add_to_cart_modal" --}} class="addToCartView"
-                                                                            data-cart_product_name="{{ $discountProduct->name }}"
-                                                                            data-cart_product_price="{{ number_format($discountProduct->price) }}"
-                                                                            data-cart_product_dis_price="{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}"
-                                                                            data-cart_product_image="{{ imagePath('product', $discountProduct->file->file) }}"
+                                                                            class="addToCartView"
+                                                                            {{-- data-cart_product_image="{{ imagePath('product', $discountProduct->file->file) }}" --}}
                                                                             onclick="cart(event,'{{ $discountProduct->id }}')">
                                                                             <i class="fas fa-shopping-cart"></i>
                                                                         </a>
                                                                     @endauth
                                                                     @guest
                                                                         <a href="javascript:;" data-toggle="modal"
-                                                                            data-target="#loginModal"><i
-                                                                                class="fas fa-shopping-cart"></i></a>
-
+                                                                            data-target="#loginModal">
+                                                                            <i class="fas fa-shopping-cart"></i>
+                                                                        </a>
                                                                     @endguest
-
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#" title="Wishlist"
-                                                                        data-toggle="modal"
-                                                                        data-target="#liton_wishlist_modal">
-                                                                        <i class="far fa-heart"></i></a>
+                                                                    @auth
+                                                                    <a href="javascript:;" title="Wishlist" onclick="wishlist(event, '{{ $discountProduct->id }}')">
+                                                                        <i class="far fa-heart"></i>
+                                                                    </a>
+                                                                    @endauth
+                                                                    @guest
+                                                                        <a href="javascript:;" data-toggle="modal"
+                                                                            data-target="#loginModal">
+                                                                            <i class="fas fa-shopping-cart"></i>
+                                                                        </a>
+                                                                    @endguest
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -241,7 +243,6 @@
                                                 </div>
                                             </div>
                                         @endforeach
-
                                     </div>
                                 </div>
                             </div>
@@ -1485,7 +1486,7 @@
     </div>
     <!-- BRAND LOGO AREA END -->
 
-    <!-- MODAL AREA START (Quick View Modal) -->
+    <!-- Quick View Modal Start -->
     <div class="ltn__modal-area ltn__quick-view-modal-area">
         <div class="modal fade" id="quick_view_modal" tabindex="-1">
             <div class="modal-dialog modal-lg" role="document">
@@ -1543,12 +1544,20 @@
                                                         </div>
                                                     </li> --}}
                                                     <li>
+                                                        @auth
                                                         <a href="#" class="theme-btn-1 btn btn-effect-1"
                                                             title="Add to Cart" data-toggle="modal"
-                                                            data-target="#add_to_cart_modal">
+                                                            data-target="#add_to_cart_modal" onclick="cart(event,'{{ $discountProduct->id }}')">
                                                             <i class="fas fa-shopping-cart"></i>
                                                             <span>ADD TO CART</span>
                                                         </a>
+                                                        @endauth
+                                                        @guest
+                                                            <a href="javascript:;" data-toggle="modal"
+                                                                data-target="#loginModal">
+                                                                <i class="fas fa-shopping-cart"></i>
+                                                            </a>
+                                                        @endguest
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1594,7 +1603,7 @@
             </div>
         </div>
     </div>
-    <!-- MODAL AREA END -->
+    <!-- Quick View Modal End -->
     @push('custom_scripts')
         <script>
             $(".productQuickView").on("click", function() {
@@ -1603,12 +1612,9 @@
                 $("#our_product_dis_price").text($(this).data('our_product_dis_price'))
                 $("#our_product_image").attr("src", $(this).data('our_product_image'))
             })
-            $(".addToCartView").on("click", function() {
-                $("#cart_product_name").text($(this).data('cart_name'))
-                $("#cart_product_price").text($(this).data('our_product_price'))
-                $("#cart_product_dis_price").text($(this).data('our_product_dis_price'))
-                $("#cart_product_image").attr("src", $(this).data('our_product_image'))
-            })
+            // $(".addToCartView").on("click", function() {
+            //     $("#cart_product_image").attr("src", $(this).data('cart_product_image'))
+            // })
         </script>
     @endpush
 @endsection
