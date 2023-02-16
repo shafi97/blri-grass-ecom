@@ -66,10 +66,11 @@
         </div>
     </div>
     <!-- preloader area end -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <!-- All JS Plugins -->
     <script src="{{ asset('frontend/js/plugins.js') }}"></script>
     <!-- Main JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
 

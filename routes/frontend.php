@@ -24,6 +24,7 @@ Route::controller(WishlistController::class)->prefix('/wishlist')->group(functio
     // Route::post('/decrementStore', 'decrementStore')->name('wishlist.decrementStore');
     Route::get('/delete/{id}', 'delete')->name('wishlist.delete');
     Route::delete('/destroy', 'destroy')->name('wishlist.destroy');
+    Route::post('/add-to-cart', 'wishlistAddToCart')->name('wishlist.wishlistAddToCart');
 });
 
 

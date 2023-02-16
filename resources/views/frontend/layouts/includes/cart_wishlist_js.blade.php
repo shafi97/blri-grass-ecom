@@ -74,37 +74,7 @@
         });
     }
 
-
-
     // Wishlist
-    // function wishlistShow() {
-    //     $.ajax({
-    //         url: '{{ route('frontend.wishlist.show') }}',
-    //         method: 'get',
-    //         success: function(res) {
-    //             if (res.status == 'success') {
-    //                 $('#wishlist').html(res.html);
-    //             }
-    //         }
-    //     });
-    // }
-
-    function wishlistDelete(e, wishlist_id) {
-        e.preventDefault();
-        $.ajax({
-            url: '{{ route('frontend.wishlist.destroy') }}',
-            type: 'delete',
-            data: {
-                id: wishlist_id,
-            },
-            success: res => {
-                // wishlistShow()
-                toast('success', res.message)
-            },
-            error: err => {}
-        });
-    }
-
     function wishlist(e, product_id) {
         e.preventDefault();
         $.ajax({
@@ -114,12 +84,12 @@
                 'product_id': product_id,
             },
             success: res => {
-                // wishlistShow()
                 $('#liton_wishlist_modal').modal('show')
                 // toast('success', res.message)
             },
             error: err => {}
         });
     }
+
     // })
 </script>

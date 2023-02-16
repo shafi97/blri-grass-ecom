@@ -12,6 +12,7 @@
                                     table tr td {
                                         vertical-align: middle !important;
                                     }
+
                                     table tr th {
                                         text-align: center
                                     }
@@ -27,8 +28,8 @@
                                             <th class="cart-product-subtotal">Subtotal</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach ($wishlists as $wishlist)
+                                    <tbody id="wishlist">
+                                        {{-- @foreach ($wishlists as $wishlist)
                                             <tr>
                                                 <td class="cart-product-remove text-center">x</td>
                                                 <td class="cart-product-image">
@@ -56,7 +57,7 @@
 
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -69,5 +70,52 @@
     <!-- End Product Area -->
 
     @push('custom_scripts')
+        <script>
+            wishlistShow()
+
+            function wishlistShow() {
+                $.ajax({
+                    url: '{{ route('frontend.wishlist.show') }}',
+                    method: 'get',
+                    success: function(res) {
+                        if (res.status == 'success') {
+                            $('#wishlist').html(res.html);
+                        }
+                    }
+                });
+            }
+
+            function wishlistDelete(e, wishlist_id) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{{ route('frontend.wishlist.destroy') }}',
+                    type: 'delete',
+                    data: {
+                        id: wishlist_id,
+                    },
+                    success: res => {
+                        wishlistShow()
+                        toast('success', res.message)
+                    },
+                    error: err => {}
+                });
+            }
+
+            function wishlistAddToCart(e, wishlist_id) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{{ route('frontend.wishlist.wishlistAddToCart') }}',
+                    type: 'post',
+                    data: {
+                        id: wishlist_id,
+                    },
+                    success: res => {
+                        wishlistShow()
+                        toast('success', res.message)
+                    },
+                    error: err => {}
+                });
+            }
+        </script>
     @endpush
 @endsection

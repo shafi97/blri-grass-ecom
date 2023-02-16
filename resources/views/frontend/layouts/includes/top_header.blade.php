@@ -147,7 +147,7 @@
                                                         data-target="#loginModal">Sign in</a></li>
                                                 <li><a href="register.html">Register</a></li>
                                                 <li><a href="account.html">My Account</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
+                                                <li><a href="{{ route('frontend.wishlist.index') }}">Wishlist</a></li>
                                             </ul>
                                         </li>
                                     </ul>

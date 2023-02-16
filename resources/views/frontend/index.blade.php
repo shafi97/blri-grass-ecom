@@ -166,9 +166,9 @@
                                             <div class="col-lg-12">
                                                 <div class="ltn__product-item ltn__product-item-3 text-center">
                                                     <div class="product-img">
-                                                        <a href="{{ route('product.show', $discountProduct->id) }}"><img
-                                                                src="{{ imagePath('product', $discountProduct->file->file) }}"
-                                                                alt="#"></a>
+                                                        <a href="{{ route('product.show', $discountProduct->id) }}">
+                                                            <img src="{{ imagePath('product', $discountProduct->file->file) }}" alt="#">
+                                                        </a>
                                                         <div class="product-badge">
                                                             <ul>
                                                                 <li class="sale-badge">
@@ -366,9 +366,9 @@
                     <div class="col-lg-12">
                         <div class="ltn__product-item ltn__product-item-3 text-center">
                             <div class="product-img">
-                                <a href="product-details.html"><img
-                                        src="{{ imagePath('product', $discountProduct->file->file) }}"
-                                        alt="#"></a>
+                                <a href="{{ route('product.show', $discountProduct->id) }}">
+                                    <img src="{{ imagePath('product', $discountProduct->file->file) }}" alt="#">
+                                </a>
                                 <div class="product-badge">
                                     <ul>
                                         <li class="sale-badge">-{{ number_format($discountProduct->discount) }}%</li>
@@ -378,20 +378,42 @@
                                     <ul>
                                         <li>
                                             <a href="#" title="Quick View" data-toggle="modal"
-                                                data-target="#quick_view_modal">
+                                            class="productQuickView"
+                                            data-our_product_name="{{ $discountProduct->name }}"
+                                            data-our_product_price="{{ number_format($discountProduct->price) }}"
+                                            data-our_product_dis_price="{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}"
+                                            data-our_product_image="{{ imagePath('product', $discountProduct->file->file) }}"
+                                            data-target="#quick_view_modal">
                                                 <i class="far fa-eye"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" title="Add to Cart" data-toggle="modal"
-                                                data-target="#add_to_cart_modal">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
+                                            @auth
+                                                <a href="javascript:;" title="Add to Cart"
+                                                    class="addToCartView"
+                                                    onclick="cart(event,'{{ $discountProduct->id }}')">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            @endauth
+                                            @guest
+                                                <a href="javascript:;" data-toggle="modal"
+                                                    data-target="#loginModal">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            @endguest
                                         </li>
                                         <li>
-                                            <a href="#" title="Wishlist" data-toggle="modal"
-                                                data-target="#liton_wishlist_modal">
-                                                <i class="far fa-heart"></i></a>
+                                            @auth
+                                            <a href="javascript:;" title="Wishlist" onclick="wishlist(event, '{{ $discountProduct->id }}')">
+                                                <i class="far fa-heart"></i>
+                                            </a>
+                                            @endauth
+                                            @guest
+                                                <a href="javascript:;" data-toggle="modal"
+                                                    data-target="#loginModal">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            @endguest
                                         </li>
                                     </ul>
                                 </div>
@@ -406,7 +428,7 @@
                                         <li><a href="#"><i class="far fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                <h2 class="product-title"><a href="product-details.html">{{ $discountProduct->name }}</a>
+                                <h2 class="product-title"><a href="{{ route('product.show', $discountProduct->id) }}">{{ $discountProduct->name }}</a>
                                 </h2>
                                 <div class="product-price">
                                     <span>&#2547;{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}</span>
@@ -471,9 +493,9 @@
             </div>
         </div>
     </div>
-    <!-- BANNER AREA END -->
+    {{-- <!-- BANNER AREA END --> --}}
 
-    <!-- SMALL PRODUCT LIST AREA START -->
+    {{-- <!-- SMALL PRODUCT LIST AREA START -->
     <div class="ltn__small-product-list-area pt-115 pb-90 d-none">
         <div class="container">
             <div class="row">
@@ -489,8 +511,9 @@
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="ltn__small-product-item">
                         <div class="small-product-item-img">
-                            <a href="product-details.html"><img src="{{ asset('frontend/img/product/1.png') }}"
-                                    alt="Image"></a>
+                            <a href="product-details.html">
+                                <img src="{{ asset('frontend/img/product/1.png') }}" alt="Image">
+                            </a>
                         </div>
                         <div class="small-product-item-info">
                             <div class="product-ratting">
@@ -721,9 +744,9 @@
             </div>
         </div>
     </div>
-    <!-- SMALL PRODUCT LIST AREA END -->
+    <!-- SMALL PRODUCT LIST AREA END --> --}}
 
-    <!-- SMALL PRODUCT LIST AREA START -->
+    {{-- <!-- SMALL PRODUCT LIST AREA START --> --}}
     <div class="ltn__small-product-list-area pt-80 pb-85">
         <div class="container">
             <div class="row justify-content-center">
@@ -736,16 +759,15 @@
                         </div>
                     </div>
                     <div class="row ltn__small-product-slider-active slick-arrow-1  slick-arrow-1-inner---">
-                        <!-- small-product-item -->
+                        {{-- <!-- small-product-item --> --}}
                         @foreach ($products->chunk(3) as $product3)
                             <div class="col-lg-4 col-md-6 col-12">
                                 @foreach ($product3 as $featureProduct)
-                                    {{-- @dd($item) --}}
                                     <div class="ltn__small-product-item">
                                         <div class="small-product-item-img">
-                                            <a href="product-details.html"><img
-                                                    src="{{ imagePath('product', $featureProduct->file->file) }}"
-                                                    alt="Image"></a>
+                                            <a href="{{ route('product.show', $featureProduct->id) }}">
+                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}" alt="Image">
+                                            </a>
                                         </div>
                                         <div class="small-product-item-info">
                                             <div class="product-ratting">
@@ -757,11 +779,12 @@
                                                     <li><a href="#"><i class="far fa-star"></i></a></li>
                                                 </ul>
                                             </div>
-                                            <h2 class="product-title"><a
-                                                    href="product-details.html">{{ $featureProduct['name'] }}</a></h2>
+                                            <h2 class="product-title">
+                                                <a href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
+                                            </h2>
                                             <div class="product-price">
-                                                <span>$129.00</span>
-                                                <del>{{ $featureProduct['price'] }}</del>
+                                                <span>&#2547; {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
+                                                <del>&#2547; {{ number_format($featureProduct->price, 2) }}</del>
                                             </div>
                                         </div>
                                     </div>
@@ -780,206 +803,37 @@
                     </div>
                     <div class="row ltn__small-product-slider-active slick-arrow-1">
                         <!-- small-product-item -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/1.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
+                        @foreach ($products->chunk(3) as $product3)
+                            <div class="col-lg-4 col-md-6 col-12">
+                                @foreach ($product3 as $featureProduct)
+                                    <div class="ltn__small-product-item">
+                                        <div class="small-product-item-img">
+                                            <a href="{{ route('product.show', $featureProduct->id) }}">
+                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}" alt="Image">
+                                            </a>
+                                        </div>
+                                        <div class="small-product-item-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title">
+                                                <a href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
+                                            </h2>
+                                            <div class="product-price">
+                                                <span>&#2547; {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
+                                                <del>&#2547; {{ number_format($featureProduct->price, 2) }}</del>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-                                    <div class="product-price">
-                                        <span>$129.00</span>
-                                        <del>$140.00</del>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/2.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-                                    <div class="product-price">
-                                        <span>$145.00</span>
-                                        <del>$155.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/3.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-                                    <div class="product-price">
-
-                                        <span>$135.00</span>
-                                        <del>$145.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- small-product-item -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/1.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-                                    <div class="product-price">
-                                        <span>$129.00</span>
-                                        <del>$140.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/2.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-                                    <div class="product-price">
-                                        <span>$145.00</span>
-                                        <del>$155.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/3.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-                                    <div class="product-price">
-
-                                        <span>$135.00</span>
-                                        <del>$145.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- small-product-item -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/1.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-                                    <div class="product-price">
-                                        <span>$129.00</span>
-                                        <del>$140.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/2.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-                                    <div class="product-price">
-                                        <span>$145.00</span>
-                                        <del>$155.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/3.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-                                    <div class="product-price">
-
-                                        <span>$135.00</span>
-                                        <del>$145.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <!--  -->
                     </div>
                 </div>
@@ -993,206 +847,37 @@
                     </div>
                     <div class="row ltn__small-product-slider-active slick-arrow-1">
                         <!-- small-product-item -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/1.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
+                        @foreach ($products->chunk(3) as $product3)
+                            <div class="col-lg-4 col-md-6 col-12">
+                                @foreach ($product3 as $featureProduct)
+                                    <div class="ltn__small-product-item">
+                                        <div class="small-product-item-img">
+                                            <a href="{{ route('product.show', $featureProduct->id) }}">
+                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}" alt="Image">
+                                            </a>
+                                        </div>
+                                        <div class="small-product-item-info">
+                                            <div class="product-ratting">
+                                                <ul>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <h2 class="product-title">
+                                                <a href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
+                                            </h2>
+                                            <div class="product-price">
+                                                <span>&#2547; {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
+                                                <del>&#2547; {{ number_format($featureProduct->price, 2) }}</del>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-                                    <div class="product-price">
-                                        <span>$129.00</span>
-                                        <del>$140.00</del>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/2.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-                                    <div class="product-price">
-                                        <span>$145.00</span>
-                                        <del>$155.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/3.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-                                    <div class="product-price">
-
-                                        <span>$135.00</span>
-                                        <del>$145.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- small-product-item -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/1.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-                                    <div class="product-price">
-                                        <span>$129.00</span>
-                                        <del>$140.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/2.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-                                    <div class="product-price">
-                                        <span>$145.00</span>
-                                        <del>$155.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/3.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-                                    <div class="product-price">
-
-                                        <span>$135.00</span>
-                                        <del>$145.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- small-product-item -->
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/1.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-                                    <div class="product-price">
-                                        <span>$129.00</span>
-                                        <del>$140.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/2.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-                                    <div class="product-price">
-                                        <span>$145.00</span>
-                                        <del>$155.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ltn__small-product-item">
-                                <div class="small-product-item-img">
-                                    <a href="product-details.html"><img src="img/product/3.png" alt="Image"></a>
-                                </div>
-                                <div class="small-product-item-info">
-                                    <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-                                    <div class="product-price">
-
-                                        <span>$135.00</span>
-                                        <del>$145.00</del>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <!--  -->
                     </div>
                 </div>
@@ -1201,7 +886,7 @@
     </div>
     <!-- SMALL PRODUCT LIST AREA END -->
 
-    <!-- BRAND LOGO AREA START -->
+    {{-- <!-- BRAND LOGO AREA START -->
     <div class="ltn__brand-logo-area ltn__brand-logo-1 section-bg-1 pt-110 pb-110 plr--9 d-none">
         <div class="container-fluid">
             <div class="row ltn__brand-logo-active">
@@ -1238,9 +923,9 @@
             </div>
         </div>
     </div>
-    <!-- BRAND LOGO AREA END -->
+    <!-- BRAND LOGO AREA END --> --}}
 
-    <!-- COUNTDOWN AREA START -->
+    {{-- <!-- COUNTDOWN AREA START -->
     <div class="ltn__call-to-action-area ltn__call-to-action-4 ltn__call-to-action-4-2 bg-overlay-black-50 bg-image pt-110 pb-120 d-none"
         data-bg="img/bg/6.jpg">
         <div class="container">
@@ -1266,7 +951,7 @@
             <img src="img/bg/11.png" alt="#">
         </div>
     </div>
-    <!-- COUNTDOWN AREA END -->
+    <!-- COUNTDOWN AREA END --> --}}
 
     {{-- <!-- BLOG AREA START (blog-3) -->
     <div class="ltn__blog-area pt-115 pb-70 d-none">
