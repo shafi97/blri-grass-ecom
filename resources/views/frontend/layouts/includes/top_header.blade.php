@@ -7,9 +7,14 @@
                 <div class="col-md-7">
                     <div class="ltn__top-bar-menu">
                         <ul>
-                            <li><a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you"><i
-                                        class="icon-mail"></i> info@webmail.com</a></li>
-                            <li><a href="locations.html"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a></li>
+                            <li>
+                                <a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you">
+                                    <i class="icon-mail"></i> info@webmail.com
+                                </a>
+                            </li>
+                            <li>
+                                <a href="locations.html"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +31,8 @@
                                                     <p>{{ user()->name }}</p>
                                                 @endauth
                                                 @guest
-                                                <a href="javascript:;" data-toggle="modal" data-target="#loginModal">Sign in</a>
+                                                    <a href="javascript:;" data-toggle="modal"
+                                                        data-target="#loginModal">Sign in</a>
                                                 @endguest
 
                                             </li>
@@ -71,7 +77,8 @@
             <div class="row">
                 <div class="col">
                     <div class="site-logo">
-                        <a href="{{ route('index') }}"><img src="{{ asset('frontend/img/logo.png') }}" alt="Logo"></a>
+                        <a href="{{ route('index') }}"><img src="{{ asset('frontend/img/logo.png') }}"
+                                alt="Logo"></a>
                     </div>
                 </div>
                 <div class="col header-contact-serarch-column d-none d-lg-block">
@@ -149,16 +156,15 @@
                                             <a href="#"><i class="icon-user"></i></a>
                                             <ul>
                                                 @guest
-                                                <li><a href="javascript:;" data-toggle="modal"
-                                                    data-target="#loginModal">Sign in</a></li>
+                                                    <li><a href="javascript:;" data-toggle="modal"
+                                                            data-target="#loginModal">Sign in</a></li>
                                                     <li><a href="{{ route('frontend.registerView') }}">Register</a></li>
                                                 @endguest
-
 
                                                 <li><a href="account.html">My Account</a></li>
                                                 <li><a href="{{ route('frontend.wishlist.index') }}">Wishlist</a></li>
                                                 @auth
-                                                <li><a href="{{ route('frontend.logout') }}">Logout</a></li>
+                                                    <li><a href="{{ route('frontend.logout') }}">Logout</a></li>
                                                 @endauth
                                             </ul>
                                         </li>
@@ -200,18 +206,25 @@
                         <nav>
                             <div class="ltn__main-menu">
                                 <ul>
-                                    <li><a href="contact.html">Home</a></li>
+                                    <li><a href="{{ route('index') }}">Home</a></li>
                                     <li class="menu-icon"><a href="#">Products</a>
                                         <ul>
                                             @foreach ($categories as $category)
-                                                <li><a href="#">{{ $category->name }} <span
-                                                            class="float-right"><i
-                                                                class="fa-solid fa-chevron-right"></i></span></a>
-                                                    <ul>
-                                                        @foreach ($category->subCategories as $subCategory)
-                                                            <li><a href="cart.html">{{ $subCategory->name }}</a></li>
-                                                        @endforeach
-                                                    </ul>
+                                                <li><a href="{{ route('productByCat', $category->id) }}">{{ $category->name }}
+                                                        @if ($category->subCategories->count() > 0)
+                                                            <span class="float-right">
+                                                                <i class="fa-solid fa-chevron-right"></i>
+                                                            </span>
+                                                        @endif
+                                                    </a>
+                                                    @if ($category->subCategories->count() > 0)
+                                                        <ul>
+                                                            @foreach ($category->subCategories as $subCategory)
+                                                                <li><a href="{{ route('productBySubCat', $subCategory->id) }}">{{ $subCategory->name }}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
                                                 </li>
                                             @endforeach
                                         </ul>

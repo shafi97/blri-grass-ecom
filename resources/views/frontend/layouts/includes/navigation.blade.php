@@ -19,13 +19,20 @@
                 <li><a href="#">Products</a>
                     <ul class="sub-menu">
                         @foreach ($categories as $category)
-                            <li><a href="#">{{ $category->name }} <span class="float-right"><i
-                                            class="fa-solid fa-chevron-right"></i></span></a>
-                                <ul>
-                                    @foreach ($category->subCategories as $subCategory)
-                                        <li><a href="cart.html">{{ $subCategory->name }}</a></li>
-                                    @endforeach
-                                </ul>
+                            <li><a href="{{ route('productByCat', $category->id) }}">{{ $category->name }}
+                                    @if ($category->subCategories->count() > 0)
+                                        <span class="float-right">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </span>
+                                    @endif
+                                </a>
+                                @if ($category->subCategories->count() > 0)
+                                    <ul>
+                                        @foreach ($category->subCategories as $subCategory)
+                                            <li><a href="{{ route('productBySubCat', $subCategory->id) }}">{{ $subCategory->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif
                             </li>
                         @endforeach
                     </ul>
@@ -58,7 +65,7 @@
                             <i class="fas fa-shopping-cart"></i>
                             <sup>5</sup>
                         </span>
-                        Shoping Cart
+                        Shopping Cart
                     </a>
                 </li>
             </ul>

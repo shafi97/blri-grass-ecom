@@ -47,8 +47,12 @@
         <!-- Add To Cart Modal End -->
 
         <!-- MODAL AREA START (Wishlist Modal) -->
-        @include('frontend.layouts.includes.wishlist_modal')
+
         <!-- MODAL AREA END -->
+
+        <!-- Quick View Modal Start -->
+        @include('frontend.layouts.includes.quick_view_modal')
+        <!-- Quick View Modal End -->
 
         <!-- Login Modal Start -->
         @include('frontend.layouts.includes.login_modal')
@@ -112,7 +116,14 @@
     </script>
     @stack('custom_scripts')
     @include('frontend.layouts.includes.cart_wishlist_js')
-
+    <script>
+        $(".productQuickView").on("click", function() {
+            $("#our_product_name").text($(this).data('our_product_name'))
+            $("#our_product_price").text($(this).data('our_product_price'))
+            $("#our_product_dis_price").text($(this).data('our_product_dis_price'))
+            $("#our_product_image").attr("src", $(this).data('our_product_image'))
+        })
+    </script>
 </body>
 
 </html>

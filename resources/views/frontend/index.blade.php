@@ -18,19 +18,29 @@
                                 <!-- Submenu -->
                                 @foreach ($categories as $category)
                                     <li class="ltn__category-menu-item ltn__category-menu-drop">
-                                        <a href="shop.html">{{ $category->name }}</a>
-                                        <ul class="ltn__category-submenu">
-                                            {{-- <li class="ltn__category-submenu-title ltn__category-menu-drop"><a href="#">Handbags</a> --}}
-                                            <ul class="ltn__category-submenu-children">
-                                                @foreach ($category->subCategories as $subCategory)
-                                                    <li><a href="#">{{ $subCategory->name }}</a></li>
-                                                @endforeach
+                                        <a href="{{ route('productByCat', $category->id) }}">{{ $category->name }}
+                                            @if ($category->subCategories->count() > 0)
+                                                <span class="float-right">
+                                                    <i class="fa-solid fa-chevron-right"></i>
+                                                </span>
+                                            @endif
+
+                                        </a>
+                                        @if ($category->subCategories->count() > 0)
+                                            <ul class="ltn__category-submenu">
+                                                {{-- <li class="ltn__category-submenu-title ltn__category-menu-drop"><a href="#">Handbags</a> --}}
+                                                <ul class="ltn__category-submenu-children">
+                                                    @foreach ($category->subCategories as $subCategory)
+                                                        <li><a href="{{ route('productBySubCat', $subCategory->id) }}">{{ $subCategory->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                                {{-- </li> --}}
                                             </ul>
+                                        @endif
+
                                     </li>
-                            </ul>
-                            </li>
-                            @endforeach
-                            <!-- Single menu end -->
+                                @endforeach
+                                <!-- Single menu end -->
                             </ul>
                         </div>
                     </div>
@@ -167,7 +177,8 @@
                                                 <div class="ltn__product-item ltn__product-item-3 text-center">
                                                     <div class="product-img">
                                                         <a href="{{ route('product.show', $discountProduct->id) }}">
-                                                            <img src="{{ imagePath('product', $discountProduct->file->file) }}" alt="#">
+                                                            <img src="{{ imagePath('product', $discountProduct->file->file) }}"
+                                                                alt="#">
                                                         </a>
                                                         <div class="product-badge">
                                                             <ul>
@@ -191,8 +202,7 @@
                                                                 <li>
                                                                     @auth
                                                                         <a href="javascript:;" title="Add to Cart"
-                                                                            class="addToCartView"
-                                                                            {{-- data-cart_product_image="{{ imagePath('product', $discountProduct->file->file) }}" --}}
+                                                                            class="addToCartView" {{-- data-cart_product_image="{{ imagePath('product', $discountProduct->file->file) }}" --}}
                                                                             onclick="cart(event,'{{ $discountProduct->id }}')">
                                                                             <i class="fas fa-shopping-cart"></i>
                                                                         </a>
@@ -206,9 +216,10 @@
                                                                 </li>
                                                                 <li>
                                                                     @auth
-                                                                    <a href="javascript:;" title="Wishlist" onclick="wishlist(event, '{{ $discountProduct->id }}')">
-                                                                        <i class="far fa-heart"></i>
-                                                                    </a>
+                                                                        <a href="javascript:;" title="Wishlist"
+                                                                            onclick="wishlist(event, '{{ $discountProduct->id }}')">
+                                                                            <i class="far fa-heart"></i>
+                                                                        </a>
                                                                     @endauth
                                                                     @guest
                                                                         <a href="javascript:;" data-toggle="modal"
@@ -378,39 +389,37 @@
                                     <ul>
                                         <li>
                                             <a href="#" title="Quick View" data-toggle="modal"
-                                            class="productQuickView"
-                                            data-our_product_name="{{ $discountProduct->name }}"
-                                            data-our_product_price="{{ number_format($discountProduct->price) }}"
-                                            data-our_product_dis_price="{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}"
-                                            data-our_product_image="{{ imagePath('product', $discountProduct->file->file) }}"
-                                            data-target="#quick_view_modal">
+                                                class="productQuickView"
+                                                data-our_product_name="{{ $discountProduct->name }}"
+                                                data-our_product_price="{{ number_format($discountProduct->price) }}"
+                                                data-our_product_dis_price="{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}"
+                                                data-our_product_image="{{ imagePath('product', $discountProduct->file->file) }}"
+                                                data-target="#quick_view_modal">
                                                 <i class="far fa-eye"></i>
                                             </a>
                                         </li>
                                         <li>
                                             @auth
-                                                <a href="javascript:;" title="Add to Cart"
-                                                    class="addToCartView"
+                                                <a href="javascript:;" title="Add to Cart" class="addToCartView"
                                                     onclick="cart(event,'{{ $discountProduct->id }}')">
                                                     <i class="fas fa-shopping-cart"></i>
                                                 </a>
                                             @endauth
                                             @guest
-                                                <a href="javascript:;" data-toggle="modal"
-                                                    data-target="#loginModal">
+                                                <a href="javascript:;" data-toggle="modal" data-target="#loginModal">
                                                     <i class="fas fa-shopping-cart"></i>
                                                 </a>
                                             @endguest
                                         </li>
                                         <li>
                                             @auth
-                                            <a href="javascript:;" title="Wishlist" onclick="wishlist(event, '{{ $discountProduct->id }}')">
-                                                <i class="far fa-heart"></i>
-                                            </a>
+                                                <a href="javascript:;" title="Wishlist"
+                                                    onclick="wishlist(event, '{{ $discountProduct->id }}')">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
                                             @endauth
                                             @guest
-                                                <a href="javascript:;" data-toggle="modal"
-                                                    data-target="#loginModal">
+                                                <a href="javascript:;" data-toggle="modal" data-target="#loginModal">
                                                     <i class="fas fa-shopping-cart"></i>
                                                 </a>
                                             @endguest
@@ -428,7 +437,8 @@
                                         <li><a href="#"><i class="far fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                <h2 class="product-title"><a href="{{ route('product.show', $discountProduct->id) }}">{{ $discountProduct->name }}</a>
+                                <h2 class="product-title"><a
+                                        href="{{ route('product.show', $discountProduct->id) }}">{{ $discountProduct->name }}</a>
                                 </h2>
                                 <div class="product-price">
                                     <span>&#2547;{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}</span>
@@ -766,7 +776,8 @@
                                     <div class="ltn__small-product-item">
                                         <div class="small-product-item-img">
                                             <a href="{{ route('product.show', $featureProduct->id) }}">
-                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}" alt="Image">
+                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}"
+                                                    alt="Image">
                                             </a>
                                         </div>
                                         <div class="small-product-item-info">
@@ -780,10 +791,12 @@
                                                 </ul>
                                             </div>
                                             <h2 class="product-title">
-                                                <a href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
+                                                <a
+                                                    href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
                                             </h2>
                                             <div class="product-price">
-                                                <span>&#2547; {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
+                                                <span>&#2547;
+                                                    {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
                                                 <del>&#2547; {{ number_format($featureProduct->price, 2) }}</del>
                                             </div>
                                         </div>
@@ -809,7 +822,8 @@
                                     <div class="ltn__small-product-item">
                                         <div class="small-product-item-img">
                                             <a href="{{ route('product.show', $featureProduct->id) }}">
-                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}" alt="Image">
+                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}"
+                                                    alt="Image">
                                             </a>
                                         </div>
                                         <div class="small-product-item-info">
@@ -823,10 +837,12 @@
                                                 </ul>
                                             </div>
                                             <h2 class="product-title">
-                                                <a href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
+                                                <a
+                                                    href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
                                             </h2>
                                             <div class="product-price">
-                                                <span>&#2547; {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
+                                                <span>&#2547;
+                                                    {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
                                                 <del>&#2547; {{ number_format($featureProduct->price, 2) }}</del>
                                             </div>
                                         </div>
@@ -853,7 +869,8 @@
                                     <div class="ltn__small-product-item">
                                         <div class="small-product-item-img">
                                             <a href="{{ route('product.show', $featureProduct->id) }}">
-                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}" alt="Image">
+                                                <img src="{{ imagePath('product', $featureProduct->file->file) }}"
+                                                    alt="Image">
                                             </a>
                                         </div>
                                         <div class="small-product-item-info">
@@ -867,10 +884,12 @@
                                                 </ul>
                                             </div>
                                             <h2 class="product-title">
-                                                <a href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
+                                                <a
+                                                    href="{{ route('product.show', $featureProduct->id) }}">{{ $featureProduct['name'] }}</a>
                                             </h2>
                                             <div class="product-price">
-                                                <span>&#2547; {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
+                                                <span>&#2547;
+                                                    {{ number_format($featureProduct->price - ($featureProduct->price * $featureProduct->discount) / 100, 2) }}</span>
                                                 <del>&#2547; {{ number_format($featureProduct->price, 2) }}</del>
                                             </div>
                                         </div>
@@ -1171,135 +1190,7 @@
     </div>
     <!-- BRAND LOGO AREA END -->
 
-    <!-- Quick View Modal Start -->
-    <div class="ltn__modal-area ltn__quick-view-modal-area">
-        <div class="modal fade" id="quick_view_modal" tabindex="-1">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <!-- <i class="fas fa-times"></i> -->
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="ltn__quick-view-modal-inner">
-                            <div class="modal-product-item">
-                                <div class="row">
-                                    <div class="col-lg-6 col-12">
-                                        <div class="modal-product-img">
-                                            <img id="our_product_image" src="" alt="#">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-12">
-                                        <div class="modal-product-info">
-                                            {{-- <div class="product-ratting">
-                                                <ul>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                                </ul>
-                                            </div> --}}
-                                            <h3 id="our_product_name"></h3>
-                                            <div class="product-price">
-                                                <span id="our_product_dis_price"></span>
-                                                <del id="our_product_price"></del>
-                                            </div>
-                                            {{-- <div class="modal-product-meta ltn__product-details-menu-1">
-                                                <ul>
-                                                    <li>
-                                                        <strong>Categories:</strong>
-                                                        <span>
-                                                            <a href="#">Parts</a>
-                                                            <a href="#">Car</a>
-                                                            <a href="#">Seat</a>
-                                                            <a href="#">Cover</a>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </div> --}}
-                                            <div class="ltn__product-details-menu-2">
-                                                <ul>
-                                                    {{-- <li>
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </li> --}}
-                                                    <li>
-                                                        @auth
-                                                        <a href="#" class="theme-btn-1 btn btn-effect-1"
-                                                            title="Add to Cart" data-toggle="modal"
-                                                            data-target="#add_to_cart_modal" onclick="cart(event,'{{ $discountProduct->id }}')">
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                            <span>ADD TO CART</span>
-                                                        </a>
-                                                        @endauth
-                                                        @guest
-                                                            <a href="javascript:;" data-toggle="modal"
-                                                                data-target="#loginModal">
-                                                                <i class="fas fa-shopping-cart"></i>
-                                                            </a>
-                                                        @endguest
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ltn__product-details-menu-3">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" class="" title="Wishlist"
-                                                            data-toggle="modal" data-target="#liton_wishlist_modal">
-                                                            <i class="far fa-heart"></i>
-                                                            <span>Add to Wishlist</span>
-                                                        </a>
-                                                    </li>
-                                                    {{-- <li>
-                                                        <a href="#" class="" title="Compare" data-toggle="modal" data-target="#quick_view_modal">
-                                                            <i class="fas fa-exchange-alt"></i>
-                                                            <span>Compare</span>
-                                                        </a>
-                                                    </li> --}}
-                                                </ul>
-                                            </div>
-                                            <hr>
-                                            <div class="ltn__social-media">
-                                                <ul>
-                                                    <li>Share:</li>
-                                                    <li><a href="#" title="Facebook"><i
-                                                                class="fab fa-facebook-f"></i></a></li>
-                                                    <li><a href="#" title="Twitter"><i
-                                                                class="fab fa-twitter"></i></a></li>
-                                                    <li><a href="#" title="Linkedin"><i
-                                                                class="fab fa-linkedin"></i></a></li>
-                                                    <li><a href="#" title="Instagram"><i
-                                                                class="fab fa-instagram"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick View Modal End -->
     @push('custom_scripts')
-        <script>
-            $(".productQuickView").on("click", function() {
-                $("#our_product_name").text($(this).data('our_product_name'))
-                $("#our_product_price").text($(this).data('our_product_price'))
-                $("#our_product_dis_price").text($(this).data('our_product_dis_price'))
-                $("#our_product_image").attr("src", $(this).data('our_product_image'))
-            })
-            // $(".addToCartView").on("click", function() {
-            //     $("#cart_product_image").attr("src", $(this).data('cart_product_image'))
-            // })
-        </script>
+
     @endpush
 @endsection
