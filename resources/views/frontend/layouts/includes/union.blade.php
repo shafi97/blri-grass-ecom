@@ -1,7 +1,8 @@
 @if ($datum->count() > 0)
     <div class="form-group">
         <label>Union </label>
-        <select name="union_id" id="">
+        <select name="union_id" id="" class="form-control">
+            <option value="">Choose..</option>
             @foreach ($datum as $data)
                 <option value="{{ $data->id }}">{{ $data->name }}</option>
             @endforeach

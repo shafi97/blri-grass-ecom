@@ -1,27 +1,11 @@
-@extends('frontend.layout.app')
+@extends('frontend.layouts.app')
 @section('content')
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="bread-inner">
-                        <ul class="bread-list">
-                            <li class="active"><a href="javascript:;">Registration</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Breadcrumbs -->
 
     <!-- Start Checkout -->
-    <section class="shop checkout section">
+    <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="checkout-form">
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -40,7 +24,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Name<span>*</span></label>
-                                        <input type="text" name="name" value="{{ old('name') }}"
+                                        <input type="text" name="name" value="{{ old('name') }}" class="form-control"
                                             required="required">
                                         @if ($errors->has('name'))
                                             <div class="alert alert-danger">{{ $errors->first('name') }}</div>
@@ -51,7 +35,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Email Address<span>*</span></label>
-                                        <input type="email" name="email" value="{{ old('email') }}"
+                                        <input type="email" name="email" value="{{ old('email') }}" class="form-control"
                                             required="required">
                                         @if ($errors->has('email'))
                                             <div class="alert alert-danger">{{ $errors->first('email') }}</div>
@@ -61,7 +45,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Phone Number <span>*</span></label>
-                                        <input type="text" name="phone" value="{{ old('phone') }}"
+                                        <input type="text" name="phone" value="{{ old('phone') }}" class="form-control"
                                             required="required">
                                         @if ($errors->has('phone'))
                                             <div class="alert alert-danger">{{ $errors->first('phone') }}</div>
@@ -71,7 +55,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Date of Birth</label>
-                                        <input type="date" name="d_o_b" value="{{ old('d_o_b') }}">
+                                        <input type="date" name="d_o_b" value="{{ old('d_o_b') }}" class="form-control">
                                         @if ($errors->has('d_o_b'))
                                             <div class="alert alert-danger">{{ $errors->first('d_o_b') }}</div>
                                         @endif
@@ -81,10 +65,10 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>District <span>*</span></label>
-                                        <select name="district_id" id="district">
+                                        <select name="district_id" id="district" class="form-control singleSelect2">
                                             <option value="" selected="selected">Choose...</option>
                                             @foreach ($districts as $district)
-                                                <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                <option value="{{ $district->id }}" @selected($district->id == old('id'))>{{ $district->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -108,7 +92,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Address <span>*</span></label>
-                                        <input type="text" name="address" value="{{ old('name') }}"
+                                        <input type="text" name="address" value="{{ old('address') }}" class="form-control"
                                             required="required">
                                         @if ($errors->has('address'))
                                             <div class="alert alert-danger">{{ $errors->first('address') }}</div>
@@ -118,7 +102,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Postal Code </label>
-                                        <input type="text" name="post" value="{{ old('name') }}">
+                                        <input type="text" name="post" value="{{ old('post') }}" class="form-control">
                                         @if ($errors->has('post'))
                                             <div class="alert alert-danger">{{ $errors->first('post') }}</div>
                                         @endif
@@ -127,7 +111,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Password <span>*</span></label>
-                                        <input type="password" name="password" value="{{ old('name') }}">
+                                        <input type="password" name="password" value="{{ old('password') }}" class="form-control">
                                         @if ($errors->has('password'))
                                             <div class="alert alert-danger">{{ $errors->first('password') }}</div>
                                         @endif
@@ -136,7 +120,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-group">
                                         <label>Password Confirmation <span>*</span></label>
-                                        <input type="password" name="password_confirmation" value="{{ old('name') }}">
+                                        <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control">
                                         @if ($errors->has('password_confirmation'))
                                             <div class="alert alert-danger">{{ $errors->first('password_confirmation') }}
                                             </div>
@@ -151,7 +135,6 @@
                         <!--/ End Form -->
                     </div>
                 </div>
-            </div>
         </div>
     </section>
     <!--/ End Checkout -->

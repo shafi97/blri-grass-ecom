@@ -23,7 +23,7 @@ Route::get('/registration', [AuthController::class, 'registerView'])->name('fron
 Route::get('/getUpazila', [AuthController::class, 'getUpazila'])->name('frontend.getUpazila');
 Route::get('/getUnion', [AuthController::class, 'getUnion'])->name('frontend.getUnion');
 Route::post('/store', [AuthController::class, 'store'])->name('frontend.store');
-Route::get('/f_login', [AuthController::class, 'login'])->name('frontend.login');
+Route::get('/sign-in', [AuthController::class, 'login'])->name('frontend.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('frontend.logout');
 
 

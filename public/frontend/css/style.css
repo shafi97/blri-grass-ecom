@@ -19,7 +19,7 @@
 >>> TABLE OF CONTENTS:
 ===============================================================
 # Google fonts
-# Gutter Code 
+# Gutter Code
 # Normalize
 # Typography
 # Custom Class
@@ -38,7 +38,7 @@
 # Galleries
 # Unit test
 # ScrollUp
-# Owl Carousel 
+# Owl Carousel
 # Slick Slider
 # Background Overlay
 # Scrollbar
@@ -64,7 +64,7 @@ font-family: 'Nunito Sans', sans-serif;
 font-family: 'Roboto', sans-serif;
 */
 /* ====================================================
-    Gutter Code 
+    Gutter Code
 ==================================================== */
 .ltn__no-gutter > [class*='col-'] {
   /* No padding only for child columns */
@@ -104,7 +104,7 @@ font-family: 'Roboto', sans-serif;
     padding-left: 8px; } }
 
 /* ----------------------------------------------------
-    Normalize  
+    Normalize
 ---------------------------------------------------- */
 :root {
   --ltn__primary-color: #071c1f;
@@ -1104,7 +1104,7 @@ ul {
     color: var(--white); }
 
 /* ----------------------------------------------------
-    Owl Carousel 
+    Owl Carousel
 ---------------------------------------------------- */
 .owl-dots {
   display: block;
@@ -1531,7 +1531,7 @@ ul {
   opacity: 0.9; }
 
 /* ----------------------------------------------
-  Scrollbar 
+  Scrollbar
 ---------------------------------------------- */
 .ltn__scrollbar {
   overflow-y: auto; }
@@ -7137,7 +7137,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 /* ----------------------------------------------------
     Product Options
 ---------------------------------------------------- */
-.nice-select .option {
+/* .nice-select .option {
   margin-top: 0;
   white-space: normal;
   padding-top: 10px;
@@ -7145,7 +7145,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   line-height: 1.8; }
 
 .nice-select .list {
-  min-width: 100%; }
+  min-width: 100%; } */
 
 .ltn__shop-options {
   margin-bottom: 40px; }
@@ -7168,7 +7168,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
       list-style: none;
       margin-top: 0;
       line-height: 50px; }
-  .ltn__shop-options .short-by .nice-select {
+  /* .ltn__shop-options .short-by .nice-select {
     border-radius: 0;
     border: 2px solid #ededed;
     height: 50px;
@@ -7179,7 +7179,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
       padding-left: 10px;
       padding-right: 5px; }
     .ltn__shop-options .short-by .nice-select .current {
-      font-weight: 700; }
+      font-weight: 700; } */
 
 .ltn__grid-list-tab-menu a {
   font-size: 30px;
@@ -7447,7 +7447,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 # Common CSS
 # Section title
 # Category Area
-# Feature Area 
+# Feature Area
 # Countdown Area
 # Blog Area
 # Blog Details
@@ -7476,12 +7476,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 # Service Area
 # Call To Action
 # Elements Area
-# Service Form 
+# Service Form
 # Get A Quote Form
 # Car Dealer Form
 # Video Area
 # Brand Logo
-# Progress Bar 
+# Progress Bar
 # Our Journey Area
 # Google Map Locations Area
 # Team Details
@@ -7563,8 +7563,8 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   background-position: top center;
   background-repeat: no-repeat; }
 
-.nice-select .option {
-  font-weight: 600; }
+/* .nice-select .option {
+  font-weight: 600; } */
 
 /* small mobile :320px. */
 @media (max-width: 991px) {
@@ -7848,7 +7848,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     padding: 30px 0 5px; } }
 
 /* ----------------------------------------------------
-    Feature Area 
+    Feature Area
 ---------------------------------------------------- */
 .ltn__feature-item {
   padding: 40px 25px 10px;
@@ -10980,7 +10980,7 @@ input.cart-plus-minus-box {
   margin: 0; }
 
 /* ----------------------------------------------------
-    Service Form 
+    Service Form
 ---------------------------------------------------- */
 .ltn__service-form-box {
   margin: 0;
@@ -10998,7 +10998,7 @@ input.cart-plus-minus-box {
       display: inline-block;
       margin-right: 20px;
       list-style: none; }
-  .ltn__service-form-box .nice-select {
+  /* .ltn__service-form-box .nice-select {
     margin: 0;
     height: 60px;
     line-height: 58px;
@@ -11008,11 +11008,11 @@ input.cart-plus-minus-box {
     min-width: 200px;
     font-size: 16px;
     font-weight: 700;
-    font-family: var(--ltn__heading-font); }
-    .ltn__service-form-box .nice-select:after {
+    font-family: var(--ltn__heading-font); } */
+    /* .ltn__service-form-box .nice-select:after {
       right: 20px; }
     .ltn__service-form-box .nice-select UL li {
-      display: block; }
+      display: block; } */
   .ltn__service-form-box input {
     margin: 0; }
   .ltn__service-form-box input[type="date"] {
@@ -11026,7 +11026,7 @@ input.cart-plus-minus-box {
   .ltn__service-form-box .btn-wrapper {
     margin: 0; }
 
-.ltn__service-form-color-white .ltn__service-form-box .nice-select {
+/* .ltn__service-form-color-white .ltn__service-form-box .nice-select {
   background-color: transparent;
   border: 2px solid;
   border-color: var(--border-color-3); }
@@ -11036,7 +11036,7 @@ input.cart-plus-minus-box {
   .ltn__service-form-color-white .ltn__service-form-box .nice-select::after {
     border-bottom: 2px solid;
     border-right: 2px solid;
-    border-color: var(--border-color-3); }
+    border-color: var(--border-color-3); } */
 
 .ltn__service-form-color-white .ltn__service-form-box input {
   background-color: transparent;
@@ -11137,7 +11137,7 @@ input.cart-plus-minus-box {
   .get-a-quote-form input:-moz-placeholder {
     color: var(--ltn__color-1); }
 
-.input-item .nice-select {
+/* .input-item .nice-select {
   border: 2px solid;
   border-color: var(--border-color-1);
   border-radius: 0;
@@ -11162,7 +11162,7 @@ input.cart-plus-minus-box {
     transform: translateY(-50%);
     font-family: 'Font Awesome\ 5 Free';
     font-weight: 900;
-    color: var(--ltn__secondary-color); }
+    color: var(--ltn__secondary-color); } */
 
 .input-item::after {
   display: block;
@@ -11196,7 +11196,7 @@ input.cart-plus-minus-box {
   display: inline-block;
   margin-bottom: 30px; }
 
-.ltn__car-dealer-form-box .nice-select {
+/* .ltn__car-dealer-form-box .nice-select {
   margin: 0;
   height: 60px;
   line-height: 58px;
@@ -11207,22 +11207,22 @@ input.cart-plus-minus-box {
   font-size: 16px;
   font-weight: 700;
   font-family: var(--ltn__heading-font);
-  width: 100%; }
-  .ltn__car-dealer-form-box .nice-select .list {
+  width: 100%; } */
+  /* .ltn__car-dealer-form-box .nice-select .list {
     width: 100%;
-    z-index: 99; }
+    z-index: 99; } */
 
 .ltn__car-dealer-form-box .ltn__custom-icon::before {
   display: none; }
 
-.ltn__car-dealer-form-box .ltn__custom-icon .nice-select::before {
+/* .ltn__car-dealer-form-box .ltn__custom-icon .nice-select::before {
   content: "\f063";
   font-family: 'Font Awesome\ 5 Free';
   font-weight: 900;
   margin-right: 10px;
-  color: var(--ltn__secondary-color); }
+  color: var(--ltn__secondary-color); } */
 
-.ltn__car-dealer-form-box .ltn__custom-icon.ltn__icon-calendar .nice-select::before {
+/* .ltn__car-dealer-form-box .ltn__custom-icon.ltn__icon-calendar .nice-select::before {
   content: "\f073"; }
 
 .ltn__car-dealer-form-box .ltn__custom-icon.ltn__icon-car .nice-select::before {
@@ -11238,7 +11238,7 @@ input.cart-plus-minus-box {
   content: "\f013"; }
 
 .ltn__car-dealer-form-box .ltn__custom-icon.ltn__icon-transgender .nice-select::before {
-  content: "\f225"; }
+  content: "\f225"; } */
 
 .car-price-filter-range .price_filter .ui-widget-content {
   height: 8px;
@@ -11303,7 +11303,7 @@ input.cart-plus-minus-box {
       transform: scale(1.1); }
 
 /* ----------------------------------------------------
-    Progress Bar 
+    Progress Bar
 ---------------------------------------------------- */
 .ltn__progress-bar-wrap {
   margin-bottom: 50px; }

@@ -1,24 +1,8 @@
-@extends('frontend.layout.app')
+@extends('frontend.layouts.app')
 @section('content')
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="bread-inner">
-                        <ul class="bread-list">
-                            {{-- <li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li> --}}
-                            <li class="active"><a href="javascript:;">Login</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Breadcrumbs -->
 
     <!-- Start Checkout -->
-    <section class="shop checkout section">
+    <section class="section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-6">

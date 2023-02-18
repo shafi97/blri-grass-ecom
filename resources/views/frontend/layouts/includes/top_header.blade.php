@@ -21,8 +21,15 @@
                                     <!-- ltn__language-menu -->
                                     <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
                                         <ul>
-                                            <li><a href="javascript:;" data-toggle="modal"
-                                                    data-target="#loginModal">Sign in</a></li>
+                                            <li style="font-size: 14px">
+                                                @auth
+                                                    <p>{{ user()->name }}</p>
+                                                @endauth
+                                                @guest
+                                                <a href="javascript:;" data-toggle="modal" data-target="#loginModal">Sign in</a>
+                                                @endguest
+
+                                            </li>
                                             {{-- <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
                                                 <ul>
                                                     <li><a href="#">Arabic</a></li>
@@ -46,8 +53,6 @@
                                             </li>
 
                                             <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                                            </li>
-                                            <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -143,11 +148,18 @@
                                         <li>
                                             <a href="#"><i class="icon-user"></i></a>
                                             <ul>
+                                                @guest
                                                 <li><a href="javascript:;" data-toggle="modal"
-                                                        data-target="#loginModal">Sign in</a></li>
-                                                <li><a href="register.html">Register</a></li>
+                                                    data-target="#loginModal">Sign in</a></li>
+                                                    <li><a href="{{ route('frontend.registerView') }}">Register</a></li>
+                                                @endguest
+
+
                                                 <li><a href="account.html">My Account</a></li>
                                                 <li><a href="{{ route('frontend.wishlist.index') }}">Wishlist</a></li>
+                                                @auth
+                                                <li><a href="{{ route('frontend.logout') }}">Logout</a></li>
+                                                @endauth
                                             </ul>
                                         </li>
                                     </ul>

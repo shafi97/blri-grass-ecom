@@ -69,11 +69,13 @@
 
     <!-- All JS Plugins -->
     <script src="{{ asset('frontend/js/plugins.js') }}"></script>
+
     <!-- Main JS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    {{-- <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
-
+    @include('sweetalert::alert')
     <script>
         function toast(status, header, msg) {
             Command: toastr[status](header, msg)
@@ -95,6 +97,18 @@
                 "hideMethod": "fadeOut"
             }
         }
+    </script>
+    <script>
+        // Select 2
+        $(document).ready(function () {
+            $('.singleSelect2').select2();
+        });
+
+        // Value Reset
+        $('#farm').on('change', function () {
+            $(".valReset").empty().trigger('change')
+            // $('.valReset').val('').change();
+        })
     </script>
     @stack('custom_scripts')
     @include('frontend.layouts.includes.cart_wishlist_js')
