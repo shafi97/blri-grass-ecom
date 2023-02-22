@@ -6,6 +6,7 @@ use App\Models\Slider;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class IndexController extends Controller
 {
@@ -13,8 +14,8 @@ class IndexController extends Controller
     {
         $sliders = Slider::all();
         $products = Product::with(['file'])->get();
-        // return array_chunk($products->toArray(), 3, true);
         $discountProducts = Product::with(['file'])->whereNotNull('discount')->orderBy('discount', 'DESC')->get();
+        // return Category::withCount(['products'])->get(['id', 'name']);
         return view('frontend.index', compact('sliders','products','discountProducts'));
     }
 }

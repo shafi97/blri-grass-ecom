@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
 </head>
 @php
-    $categories = App\Models\Category::all();
+    $categories = App\Models\Category::all(['id','name']);
 @endphp
 
 <body>

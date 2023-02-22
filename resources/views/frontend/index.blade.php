@@ -8,12 +8,12 @@
                     <!-- CATEGORY-MENU-LIST START -->
                     <div class="ltn__category-menu-wrap">
                         <div class="ltn__category-menu-title">
-                            <h2 class="section-bg-1 text-color-white---">categories</h2>
+                            <h2 class="section-bg-1 text-color-white---">Categories</h2>
                         </div>
                         <div class="ltn__category-menu-toggle ltn__one-line-active">
                             <ul>
                                 @php
-                                    $categories = App\Models\Category::all();
+                                    $categories = App\Models\Category::withCount(['products'])->get(['id', 'name']);
                                 @endphp
                                 <!-- Submenu -->
                                 @foreach ($categories as $category)
@@ -149,7 +149,7 @@
                     <div class="section-title-area ltn__section-title-2--- text-center">
                         <!-- <h6 class="section-subtitle ltn__secondary-color">// Cars</h6> -->
                         <h1 class="section-title">Our Products</h1>
-                        <p>A highly efficient slip-ring scanner for today's diagnostic requirements.</p>
+                        {{-- <p>A highly efficient slip-ring scanner for today's diagnostic requirements.</p> --}}
                     </div>
                     <div class="ltn__tab-menu ltn__tab-menu-2 ltn__tab-menu-top-right-- text-uppercase text-center">
                         <div class="nav">
@@ -272,26 +272,29 @@
                 <div class="col-lg-12">
                     <div class="section-title-area ltn__section-title-2--- text-center">
                         <h1 class="section-title white-color---">Top Catagories</h1>
-                        <p class="white-color---">A highly efficient slip-ring scanner for today's diagnostic requirements.
-                        </p>
+                        {{-- <p class="white-color---">A highly efficient slip-ring scanner for today's diagnostic requirements.
+                        </p> --}}
                     </div>
                 </div>
             </div>
             <div class="row ltn__category-slider-active slick-arrow-1">
+                @foreach ($categories as $category)
                 <div class="col-12">
                     <div class="ltn__category-item ltn__category-item-3 text-center">
                         <div class="ltn__category-item-img">
                             <a href="shop.html">
-                                <img src="{{ asset('frontend/img/icons/icon-img/category-1.png') }}" alt="Image">
+                                <img src="{{ imagePath('categories', $category->image) }}" alt="Image">
                             </a>
                         </div>
                         <div class="ltn__category-item-name">
-                            <h5><a href="shop.html">Browse all</a></h5>
-                            <h6>(235 item)</h6>
+                            <h5><a href="shop.html">{{ $category->name }}</a></h5>
+                            <h6>({{ $category->products->count() }})</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
+                @endforeach
+
+                {{-- <div class="col-12">
                     <div class="ltn__category-item ltn__category-item-3 text-center">
                         <div class="ltn__category-item-img">
                             <a href="shop.html">
@@ -355,7 +358,7 @@
                             <h6>(85 item)</h6>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -756,8 +759,101 @@
     </div>
     <!-- SMALL PRODUCT LIST AREA END --> --}}
 
+    {{-- Bestseller Products Start --}}
+    <div class="ltn__product-slider-area ltn__product-gutter pt-115 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-area ltn__section-title-2--- text-center">
+                        <h1 class="section-title">Bestseller Products</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row ltn__product-slider-item-four-active slick-arrow-1">
+                <!-- ltn__product-item -->
+                @foreach ($discountProducts as $discountProduct)
+                    <div class="col-lg-12">
+                        <div class="ltn__product-item ltn__product-item-3 text-center">
+                            <div class="product-img">
+                                <a href="{{ route('product.show', $discountProduct->id) }}">
+                                    <img src="{{ imagePath('product', $discountProduct->file->file) }}" alt="#">
+                                </a>
+                                <div class="product-badge">
+                                    <ul>
+                                        <li class="sale-badge">-{{ number_format($discountProduct->discount) }}%</li>
+                                    </ul>
+                                </div>
+                                <div class="product-hover-action">
+                                    <ul>
+                                        <li>
+                                            <a href="#" title="Quick View" data-toggle="modal"
+                                                class="productQuickView"
+                                                data-our_product_name="{{ $discountProduct->name }}"
+                                                data-our_product_price="{{ number_format($discountProduct->price) }}"
+                                                data-our_product_dis_price="{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}"
+                                                data-our_product_image="{{ imagePath('product', $discountProduct->file->file) }}"
+                                                data-target="#quick_view_modal">
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            @auth
+                                                <a href="javascript:;" title="Add to Cart" class="addToCartView"
+                                                    onclick="cart(event,'{{ $discountProduct->id }}')">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            @endauth
+                                            @guest
+                                                <a href="javascript:;" data-toggle="modal" data-target="#loginModal">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            @endguest
+                                        </li>
+                                        <li>
+                                            @auth
+                                                <a href="javascript:;" title="Wishlist"
+                                                    onclick="wishlist(event, '{{ $discountProduct->id }}')">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
+                                            @endauth
+                                            @guest
+                                                <a href="javascript:;" data-toggle="modal" data-target="#loginModal">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                </a>
+                                            @endguest
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-ratting">
+                                    <ul>
+                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                        <li><a href="#"><i class="far fa-star"></i></a></li>
+                                    </ul>
+                                </div>
+                                <h2 class="product-title"><a
+                                        href="{{ route('product.show', $discountProduct->id) }}">{{ $discountProduct->name }}</a>
+                                </h2>
+                                <div class="product-price">
+                                    <span>&#2547;{{ number_format($discountProduct->price - ($discountProduct->price * $discountProduct->discount) / 100) }}</span>
+                                    <del>&#2547;{{ number_format($discountProduct->price) }}</del>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    </div>
+    {{-- Bestseller Products End --}}
+
     {{-- <!-- SMALL PRODUCT LIST AREA START --> --}}
-    <div class="ltn__small-product-list-area pt-80 pb-85">
+    {{-- <div class="ltn__small-product-list-area pt-80 pb-85">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6">
@@ -769,7 +865,7 @@
                         </div>
                     </div>
                     <div class="row ltn__small-product-slider-active slick-arrow-1  slick-arrow-1-inner---">
-                        {{-- <!-- small-product-item --> --}}
+                        <!-- small-product-item -->
                         @foreach ($products->chunk(3) as $product3)
                             <div class="col-lg-4 col-md-6 col-12">
                                 @foreach ($product3 as $featureProduct)
@@ -902,7 +998,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- SMALL PRODUCT LIST AREA END -->
 
     {{-- <!-- BRAND LOGO AREA START -->

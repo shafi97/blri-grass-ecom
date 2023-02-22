@@ -380,7 +380,7 @@
             15-2. Slider Active 2
         --------------------------------------------------------- */
         $('.ltn__slide-active-2').slick({
-            autoplay: false,
+            autoplay: true,
             autoplaySpeed: 2000,
             arrows: false,
             dots: true,
@@ -452,6 +452,7 @@
             16. Product Slider One
         --------------------------------------------------------- */
         $('.ltn__product-slider-item-four-active').slick({
+            autoplay: true,
             arrows: true,
             dots: false,
             infinite: true,
@@ -537,6 +538,7 @@
             17. Tab Product Slider One
         --------------------------------------------------------- */
         $('.ltn__tab-product-slider-one-active').slick({
+            autoplay: true,
             arrows: true,
             dots: false,
             infinite: true,
@@ -834,6 +836,7 @@
             22. Category Slider
         --------------------------------------------------------- */
         $('.ltn__category-slider-active').slick({
+            autoplay: true,
             arrows: true,
             dots: false,
             infinite: true,
@@ -1087,6 +1090,7 @@
         --------------------------------------------------------- */
         if($('.ltn__brand-logo-active').length){
             $('.ltn__brand-logo-active').slick({
+                autoplay: true,
                 rtl: false,
                 arrows: false,
                 dots: false,
