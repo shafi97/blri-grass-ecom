@@ -1,9 +1,6 @@
 @extends('dashboard.layout.app')
 @section('title', 'Slider')
 @section('content')
-    @push('custom_css')
-        @include('dashboard.layout.includes.data_table_css')
-    @endpush
     <!-- start page content wrapper-->
     <div class="page-content-wrapper">
         <!-- start page content-->
@@ -56,7 +53,6 @@
         @include('dashboard.slider.create')
     @endcan
     @push('custom_scripts')
-        @include('dashboard.layout.includes.data_table_js')
         <script>
             $(function() {
                 $('#data_table').DataTable({
@@ -104,6 +100,7 @@
         <script src="{{ asset('backend/plugins/ckeditor/ckeditor.js') }}"></script>
         <script>
             CKEDITOR.replace('text');
+            CKEDITOR.replace('updateText');
             function ajaxStorePage(e, form, modal) {
                 e.preventDefault();
                 CKEDITOR.instances['text'].updateElement();

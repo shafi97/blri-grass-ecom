@@ -15,7 +15,7 @@ class SliderController extends Controller
             return $error;
         }
         if ($request->ajax()) {
-                user()->role == 1 ? $sliders = Slider::query() :
+            user()->role == 1 ? $sliders = Slider::query() :
                 $sliders = Slider::whereUser_id(user()->id);
             return DataTables::of($sliders)
                 ->addIndexColumn()
@@ -24,7 +24,7 @@ class SliderController extends Controller
                 })
                 ->addColumn('image', function ($row) {
                     $src = imagePath('slider', $row->image);
-                    return '<img src="'.$src.'" width="200px">';
+                    return '<img src="' . $src . '" width="200px">';
                 })
                 ->addColumn('text', function ($row) {
                     return html_entity_decode($row->text);
@@ -32,14 +32,14 @@ class SliderController extends Controller
                 ->addColumn('action', function ($row) {
                     $btn = '';
                     if (userCan('slider-edit')) {
-                        $btn .= view('button', ['type' => 'ajax-edit', 'route' => route('admin.slider.edit', $row->id) , 'row' => $row]);
+                        $btn .= view('button', ['type' => 'ajax-edit', 'route' => route('admin.slider.edit', $row->id), 'row' => $row]);
                     }
                     if (userCan('slider-delete')) {
                         $btn .= view('button', ['type' => 'ajax-delete', 'route' => route('admin.slider.destroy', $row->id), 'row' => $row, 'src' => 'dt']);
                     }
                     return $btn;
                 })
-                ->rawColumns(['text','image', 'action', 'created_at'])
+                ->rawColumns(['text', 'image', 'action', 'created_at'])
                 ->make(true);
         }
         return view('dashboard.slider.index');
@@ -55,15 +55,15 @@ class SliderController extends Controller
             'text'  => 'required',
         ]);
         $data['user_id'] = user()->id;
-        if($request->hasFile('image')){
-            $data['image'] = imageStore($request, 'image','slider', 'uploads/images/slider/');
+        if ($request->hasFile('image')) {
+            $data['image'] = imageStore($request, 'image', 'slider', 'uploads/images/slider/');
         }
 
         try {
             Slider::create($data);
-            return response()->json(['message'=> __('app.success-message')], 200);
+            return response()->json(['message' => __('app.success-message')], 200);
         } catch (\Exception $e) {
-            return response()->json(['message'=>__('app.oops')], 500);
+            return response()->json(['message' => __('app.oops')], 500);
             // return response()->json(['message'=>$e->getMessage()], 500);
         }
     }
@@ -81,31 +81,36 @@ class SliderController extends Controller
     }
     public function update(Request $request, Slider $slider)
     {
-        if ($error = $this->authorize('slider-add')) {
+        if ($error = $this->authorize('slider-edit')) {
             return $error;
         }
         $data = $request->validate([
-            'name' =>'required|string|max:191',
+            'image' => 'nullable|image|mimes:jpeg,jpg,JPG,png|max:3072',
+            'text'  => 'required',
         ]);
+        $data['user_id'] = user()->id;
+        if ($request->hasFile('image')) {
+            $data['image'] = imageUpdate($request, 'image', 'slider', 'uploads/images/slider/', $slider->image);
+        }
         try {
             $slider->update($data);
-            return response()->json(['message'=> 'Data Successfully Inserted'], 200);
+            return response()->json(['message' => 'Data Successfully Inserted'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message'=>__('app.oops')], 500);
+            return response()->json(['message' => __('app.oops')], 500);
             // return response()->json(['message'=>$e->getMessage()], 500);
         }
     }
 
-    public function destroy(Category $category)
+    public function destroy(Slider $slider)
     {
         if ($error = $this->authorize('slider-delete')) {
             return $error;
         }
         try {
             $slider->delete();
-            return response()->json(['message'=> __('app.success-message')], 200);
+            return response()->json(['message' => __('app.success-message')], 200);
         } catch (\Exception $e) {
-            return response()->json(['message'=> __('app.oops')], 500);
+            return response()->json(['message' => __('app.oops')], 500);
             // return response()->json(['message'=>$e->getMessage()], 500);
         }
     }

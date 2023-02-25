@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Place favicon.png in the root directory -->
+    {{-- <!-- Place favicon.png in the root directory --> --}}
     <link rel="shortcut icon" href="{{ asset('frontend/img/favicon.png') }}" type="image/x-icon" />
-    <!-- Font Icons css -->
+    {{-- <!-- Font Icons css --> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/font-icons.css') }}">
-    <!-- plugins css -->
+    {{-- <!-- plugins css --> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/plugins.css') }}">
-    <!-- Main Stylesheet -->
+    {{-- <!-- Main Stylesheet --> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    <!-- Responsive css -->
+    {{-- <!-- Responsive css --> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
 </head>
@@ -31,37 +31,37 @@
 
 <body>
 
-    <!-- Body main wrapper start -->
+    {{-- <!-- Body main wrapper start --> --}}
     <div class="body-wrapper">
         @include('frontend.layouts.includes.top_header')
         @include('frontend.layouts.includes.navigation')
 
         @yield('content')
 
-        <!-- FOOTER AREA START -->
+        {{-- <!-- FOOTER AREA START --> --}}
         @include('frontend.layouts.includes.footer')
-        <!-- FOOTER AREA END -->
+        {{-- <!-- FOOTER AREA END --> --}}
 
-        <!-- Add To Cart Modal Start -->
+        {{-- <!-- Add To Cart Modal Start --> --}}
         @include('frontend.layouts.includes.cart_modal')
-        <!-- Add To Cart Modal End -->
+        {{-- <!-- Add To Cart Modal End --> --}}
 
-        <!-- MODAL AREA START (Wishlist Modal) -->
+        {{-- <!-- MODAL AREA START (Wishlist Modal) --> --}}
 
-        <!-- MODAL AREA END -->
+        {{-- <!-- MODAL AREA END --> --}}
 
-        <!-- Quick View Modal Start -->
+        {{-- <!-- Quick View Modal Start --> --}}
         @include('frontend.layouts.includes.quick_view_modal')
-        <!-- Quick View Modal End -->
+        {{-- <!-- Quick View Modal End --> --}}
 
-        <!-- Login Modal Start -->
+        {{-- <!-- Login Modal Start --> --}}
         @include('frontend.layouts.includes.login_modal')
 
     </div>
     <!-- Body main wrapper end -->
 
     <!-- preloader area start -->
-    <div class="preloader d-none" id="preloader">
+    <div class="preloader" id="preloader">
         <div class="preloader-inner">
             <div class="spinner">
                 <div class="dot1"></div>

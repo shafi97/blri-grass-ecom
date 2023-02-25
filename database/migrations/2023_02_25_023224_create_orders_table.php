@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->boolean('status')->default(1)->comment('1=placed, 2=accepted, 3=shipped, 4=delivered, 5=cancelled');
             $table->integer('quantity')->default(1);
             $table->decimal('price',14,2);
-            $table->decimal('discount',14,2)->default(0);
-            $table->boolean('pay_method')->comment('1=cash on delivery, 2=bank');
+            $table->float('discount')->default(0)->nullable();
+            $table->boolean('pay_method')->comment('1=COD, 2=bank');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('orders');
     }
 };

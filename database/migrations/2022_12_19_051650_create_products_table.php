@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('color',191)->nullable();
             $table->integer('quantity')->nullable();
             $table->decimal('price',14,2)->nullable();
-            $table->decimal('discount',14,2)->default(0)->nullable();
+            $table->float('discount')->default(0)->nullable();
             $table->string('product_code',191)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

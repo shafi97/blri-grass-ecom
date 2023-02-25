@@ -6,6 +6,7 @@ use App\Models\Sale;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ShippingController extends Controller
@@ -25,7 +26,7 @@ class ShippingController extends Controller
 
     public function index(Request $request)
     {
-        $product              = Product::whereid($request->session()->get('product_id'))->first();
+        $product              = Product::whereId($request->session()->get('product_id'))->first();
         $priceWithoutDiscount = $product->price * $request->session()->get('quantity');
         $discount             = $request->session()->get('quantity') * ($product->price * $product->discount / 100);
         $priceWithDiscount    = $product->price - $product->price * $product->discount / 100;
@@ -38,21 +39,22 @@ class ShippingController extends Controller
     public function confirm(Request $request)
     {
         $this->validate($request,[
-            'product_id' => 'required',
-            'pay_method'   => 'required',
+            'product_id' => 'required|numeric',
+            'pay_method' => 'required|boolean',
         ]);
-        $product = Product::whereid($request->product_id)->first();
-        $priceWithoutDiscount = $product->price * $request->session()->get('quantity') - ($product->price * $product->discount / 100);
-        $totalPrice = $priceWithoutDiscount * $request->quantity;
+        $product = Product::whereId($request->product_id)->first();
+        // $priceWithoutDiscount = $product->price * $request->session()->get('quantity') - ($product->price * $product->discount / 100);
+        // $totalPrice = $priceWithoutDiscount * $request->quantity;
 
         try{
-            Sale::create([
+            Order::create([
                 'user_id'    => user()->id,
                 'product_id' => $request->product_id,
-                'pay_method'   => $request->pay_method,
-                'quantity'     => $request->session()->get('quantity'),
-                'price'        => $priceWithoutDiscount,
-                'discount'     => $product->discount,
+                'status'     => 1,
+                'pay_method' => $request->pay_method,
+                'quantity'   => $request->session()->get('quantity'),
+                'price'      => $product->price,
+                'discount'   => $product->discount,
             ]);
             Alert::success('Success','Order Successfully Created');
             return redirect()->route('index');

@@ -11,10 +11,10 @@
     <script src="{{ asset('backend/js/p') }}ace.min.js"></script>
 
     {{-- plugins --}}
-    @stack('custom_css')
-    <link href="{{ asset('backend/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('backend/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 
     {{-- CSS Files --}}
     <link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -91,14 +91,14 @@
     <script src="{{ asset('backend/plugins/simplebar/js/simplebar.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/metismenu/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('backend/js/bootstrap.bundle.min.js') }}"></script>
-    {{-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> --}}
-
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    @include('dashboard.layout.includes.data_table_js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('backend/js/plugins-init.js') }}"></script>
     @include('sweetalert::alert')
-    
+
     {{-- Main JS --}}
     <script src="{{ asset('backend/js/main.js') }}"></script>
     @stack('custom_scripts')

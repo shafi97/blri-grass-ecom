@@ -381,7 +381,7 @@
         --------------------------------------------------------- */
         $('.ltn__slide-active-2').slick({
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 5000,
             arrows: false,
             dots: true,
             fade: true,
