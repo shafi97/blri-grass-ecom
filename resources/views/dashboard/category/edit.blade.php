@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Admin User</h5>
+                <h5 class="modal-title">Edit Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form onsubmit="ajaxStore(event, this, 'editModal')" action="{{ route('admin.category.update', $category->id) }}"
@@ -18,6 +18,17 @@
                                 required />
                             @if ($errors->has('name'))
                                 <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                            @endif
+                        </div>
+                        <div class="col-md-6">
+                            <label for="image" class="form-label required">Icon (105px:105px)</label>
+                            <img src="{{ imagePath('category', $category->image) }}" height="100px" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="image" class="form-label">Icon </label>
+                            <input type="file" name="image" class="form-control">
+                            @if ($errors->has('image'))
+                                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                             @endif
                         </div>
                     </div>

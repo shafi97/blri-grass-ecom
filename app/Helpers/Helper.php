@@ -1,9 +1,10 @@
 <?php
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Authorization\AuthorizationChecker;
 
 if(!function_exists('bdDate')){
@@ -11,6 +12,7 @@ if(!function_exists('bdDate')){
         return Carbon::parse($date)->format('d/m/Y');
     }
 }
+
 if(!function_exists('bdDateTime')){
     function bdDateTime($date){
         return Carbon::parse($date)->format('d/m/Y h:i A');
@@ -22,6 +24,7 @@ if(!function_exists('ageWithDays')){
         return Carbon::parse($d_o_b)->diff(Carbon::now())->format('%y years, %m months and %d days');
     }
 }
+
 if(!function_exists('ageWithMonths')){
     function ageWithMonths($d_o_b){
         return Carbon::parse($d_o_b)->diff(Carbon::now())->format('%y years, %m months');
@@ -32,37 +35,54 @@ if (!function_exists('imageStore')) {
     function imageStore(Request $request, $requestName, string $name, string $path)
     {
         if($request->hasFile($requestName)){
-            $pathCreate = public_path().$path;
+            $pathCreate = public_path().'/'.$path;
             !file_exists($pathCreate) ?? File::makeDirectory($pathCreate, 0777, true, true);
 
             $image = $request->file($requestName);
-            $image_name = $name . uniqueId(10).'.'.$image->getClientOriginalExtension();
+            $imageName = $name .'_'. uniqueId(10).'.'.$image->getClientOriginalExtension();
             if ($image->isValid()) {
-                $request->$request->move($path,$image_name);
-                return $image_name;
+                $request->$requestName->move(public_path().'/'.$path,$imageName);
+                return $imageName;
             }
         }
     }
 }
 
 if (!function_exists('imageUpdate')) {
-    function imageUpdate(Request $request, $request_name, string $name, string $path, $image)
+    function imageUpdate(Request $request, $requestName ,string $name, string $path, $image)
     {
-        if($request->hasFile($request_name)){
-            $deletePath =  public_path($path.$image);
+        if($request->hasFile($requestName)){
+            $deletePath =  public_path().'/'.$path.$image;
             if(file_exists($deletePath) && $image != ''){
                 unlink($deletePath);
             }
-            // file_exists($deletePath) ? unlink($deletePath) : false;
-            $createPath = public_path().$path;
+            $createPath = public_path().'/'.$path;
             !file_exists($createPath) ?? File::makeDirectory($createPath, 0777, true, true);
 
-            $image = $request->file($request_name);
-            $image_name = $name . uniqueId(20).'.'.$image->getClientOriginalExtension();
+            $image = $request->file($requestName);
+            $imageName = $name .'_'. uniqueId(20).'.'.$image->getClientOriginalExtension();
             if ($image->isValid()) {
-                $request->image->move($path,$image_name);
-                return $image_name;
+                $request->$requestName->move(public_path().'/'.$path,$imageName);
+                return $imageName;
             }
+        }
+    }
+}
+
+if (!function_exists('fileDestroy')) {
+    function fileDestroy(string $path, $data)
+    {
+        $checkPath =  public_path($path.$data->image);
+        try{
+            if(file_exists($checkPath)){
+                unlink($checkPath);
+            }
+            $data->delete();
+            Alert::success('Success','Successfully Deleted');
+            return redirect()->back();
+        }catch (\Exception $ex) {
+            Alert::error('Oops...','Delete Failed');
+            return back();
         }
     }
 }
@@ -76,7 +96,6 @@ if(!function_exists('profileImg')){
         }
     }
 }
-
 
 if (!function_exists('imagePath')) {
     function imagePath($folder, $image)

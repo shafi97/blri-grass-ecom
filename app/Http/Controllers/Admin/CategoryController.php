@@ -16,27 +16,31 @@ class CategoryController extends Controller
             return $error;
         }
         if ($request->ajax()) {
-                user()->role == 1 ? $category = Category::orderBy('name') :
+            user()->role == 1 ? $category = Category::orderBy('name') :
                 $category = Category::whereUser_id(user()->id)->orderBy('name');
             return DataTables::of($category)
                 ->addIndexColumn()
                 ->addColumn('check', function ($row) {
-                    return '<input type="checkbox" name="select[]" onclick="checkcheckbox()" id="check_'.$row->id.'" class="check" value="'.$row->id.'">';
+                    return '<input type="checkbox" name="select[]" onclick="checkcheckbox()" id="check_' . $row->id . '" class="check" value="' . $row->id . '">';
                 })
                 ->addColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
+                ->addColumn('image', function ($row) {
+                    $src = asset('uploads/images/category/' . $row->image);
+                    return '<img src="' . $src . '" height="80px">';
+                })
                 ->addColumn('action', function ($row) {
                     $btn = '';
                     if (userCan('category-edit')) {
-                        $btn .= view('button', ['type' => 'ajax-edit', 'route' => route('admin.category.edit', $row->id) , 'row' => $row]);
+                        $btn .= view('button', ['type' => 'ajax-edit', 'route' => route('admin.category.edit', $row->id), 'row' => $row]);
                     }
                     if (userCan('category-delete')) {
                         $btn .= view('button', ['type' => 'ajax-delete', 'route' => route('admin.category.destroy', $row->id), 'row' => $row, 'src' => 'dt']);
                     }
                     return $btn;
                 })
-                ->rawColumns(['check', 'action', 'created_at'])
+                ->rawColumns(['check', 'image', 'action', 'created_at'])
                 ->make(true);
         }
         return view('dashboard.category.index');
@@ -48,15 +52,19 @@ class CategoryController extends Controller
             return $error;
         }
         $data = $request->validate([
-            'name' =>'required|unique:categories,name|string|max:191',
+            'name'  => 'required|unique:categories,name|string|max:191',
+            'image' => 'required|image|mimes:png,jpeg,jpg,JPG,PNG,JPEG',
         ]);
         $data['user_id'] = user()->id;
-
+        if ($request->hasFile('image')) {
+            $data['image'] = imageStore($request, 'image', 'category', 'uploads/images/category');
+        }
         try {
             Category::create($data);
-            return response()->json(['message'=> __('app.success-message')], 200);
+
+            return response()->json(['message' => __('app.success-message')], 200);
         } catch (\Exception $e) {
-            return response()->json(['message'=>__('app.oops')], 500);
+            return response()->json(['message' => __('app.oops')], 500);
             // return response()->json(['message'=>$e->getMessage()], 500);
         }
     }
@@ -78,13 +86,17 @@ class CategoryController extends Controller
             return $error;
         }
         $data = $request->validate([
-            'name' =>'required|string|max:191',
+            'name'  => 'required|string|max:191',
+            'image' => 'nullable|image|mimes:png,jpeg,jpg,JPG,PNG,JPEG',
         ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = imageUpdate($request, 'image', 'category', 'uploads/images/category/', $category->image);
+        }
         try {
             $category->update($data);
-            return response()->json(['message'=> 'Data Successfully Inserted'], 200);
+            return response()->json(['message' => 'Data Successfully Inserted'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message'=>__('app.oops')], 500);
+            return response()->json(['message' => __('app.oops')], 500);
             // return response()->json(['message'=>$e->getMessage()], 500);
         }
     }
@@ -94,11 +106,15 @@ class CategoryController extends Controller
         if ($error = $this->authorize('category-delete')) {
             return $error;
         }
+        $checkPath =  public_path('uploads/images/category/' . $category->image);
+        if (file_exists($checkPath)) {
+            unlink($checkPath);
+        }
         try {
             $category->delete();
-            return response()->json(['message'=> __('app.success-message')], 200);
+            return response()->json(['message' => __('app.success-message')], 200);
         } catch (\Exception $e) {
-            return response()->json(['message'=> __('app.oops')], 500);
+            return response()->json(['message' => __('app.oops')], 500);
             // return response()->json(['message'=>$e->getMessage()], 500);
         }
     }

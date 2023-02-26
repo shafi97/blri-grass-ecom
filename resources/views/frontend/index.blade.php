@@ -57,7 +57,7 @@
                                         <div class="row">
                                             <div class="col-lg-7 col-md-7 col-sm-7 align-self-center">
                                                 <div class="slide-item-info">
-                                                    <div class="slide-item-info-inner ltn__slide-animation">
+                                                    {{-- <div class="slide-item-info-inner ltn__slide-animation">
                                                         <h5
                                                             class="slide-sub-title ltn__secondary-color animated text-uppercase">
                                                             Up To 50% Off Today Only!</h5>
@@ -72,7 +72,7 @@
                                                                 class="theme-btn-1 btn btn-effect-1 text-uppercase">Shop
                                                                 now</a>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                             <div class="col-lg-5 col-md-5 col-sm-5 align-self-center">
@@ -283,7 +283,7 @@
                     <div class="ltn__category-item ltn__category-item-3 text-center">
                         <div class="ltn__category-item-img">
                             <a href="shop.html">
-                                <img src="{{ imagePath('categories', $category->image) }}" alt="Image">
+                                <img src="{{ imagePath('category', $category->image) }}" alt="Image">
                             </a>
                         </div>
                         <div class="ltn__category-item-name">

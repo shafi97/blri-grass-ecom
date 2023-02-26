@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label for="image" class="form-label required">Image <span class="text-danger">width:1900 x Height:700</span> </label>
+                            <label for="image" class="form-label required">Image <span class="text-danger">width:1762px x Height:1060px</span> </label>
                             <input type="file" name="image" class="form-control" value="{{ old('image') }}"
                                 required />
                             @if ($errors->has('image'))

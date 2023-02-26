@@ -12,13 +12,11 @@
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="image" class="form-label required">Image <span class="text-danger"></span>
-                            </label>
+                            <label for="image" class="form-label required">Image</label>
                             <img src="{{ imagePath('slider', $slider->image) }}" alt="" height="100px">
                         </div>
                         <div class="col-md-6">
-                            <label for="image" class="form-label required">Image <span class="text-danger">width:1900
-                                    x Height:700</span> </label>
+                            <label for="image" class="form-label required">Image <span class="text-danger">width:1762px x Height:1060px</span> </label>
                             <input type="file" name="image" class="form-control" />
                             @if ($errors->has('image'))
                                 <div class="alert alert-danger">{{ $errors->first('image') }}</div>

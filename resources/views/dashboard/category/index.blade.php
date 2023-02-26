@@ -1,9 +1,6 @@
 @extends('dashboard.layout.app')
 @section('title', 'Category')
 @section('content')
-@push('custom_css')
-@include('dashboard.layout.includes.data_table_css')
-@endpush
     <!-- start page content wrapper-->
     <div class="page-content-wrapper">
         <!-- start page content-->
@@ -38,6 +35,7 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Name</th>
+                                    <th>Image</th>
                                     <th class="no-sort" width="60px">Action</th>
                                 </tr>
                             </thead>
@@ -54,7 +52,6 @@
         @include('dashboard.category.create')
     @endcan
     @push('custom_scripts')
-    @include('dashboard.layout.includes.data_table_js')
     <script>
         $(function() {
             $('#data_table').DataTable({
@@ -81,6 +78,10 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'image',
+                        name: 'image'
                     },
                     {
                         data: 'action',

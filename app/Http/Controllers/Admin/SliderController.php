@@ -52,7 +52,7 @@ class SliderController extends Controller
         }
         $data = $request->validate([
             'image' => 'required|image|mimes:jpeg,jpg,JPG,png|max:3072',
-            'text'  => 'required',
+            'text'  => 'nullable',
         ]);
         $data['user_id'] = user()->id;
         if ($request->hasFile('image')) {
@@ -86,7 +86,7 @@ class SliderController extends Controller
         }
         $data = $request->validate([
             'image' => 'nullable|image|mimes:jpeg,jpg,JPG,png|max:3072',
-            'text'  => 'required',
+            'text'  => 'nullable',
         ]);
         $data['user_id'] = user()->id;
         if ($request->hasFile('image')) {
@@ -105,6 +105,10 @@ class SliderController extends Controller
     {
         if ($error = $this->authorize('slider-delete')) {
             return $error;
+        }
+        $checkPath =  public_path('uploads/images/category/' . $slider->image);
+        if (file_exists($checkPath)) {
+            unlink($checkPath);
         }
         try {
             $slider->delete();
