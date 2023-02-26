@@ -35,7 +35,11 @@
                             <thead class="bg-primary text-light">
                                 <tr>
                                     <th>SL</th>
-                                    <th>Text</th>
+                                    <th>Customer</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Date</th>
                                     {{-- <th>Image</th> --}}
                                     {{-- <th class="no-sort" width="60px">Action</th> --}}
                                 </tr>
@@ -77,8 +81,24 @@
                             orderable: false,
                         },
                         {
-                            data: 'product',
+                            data: 'user.name',
+                            name: 'user.name'
+                        },
+                        {
+                            data: 'product.name',
                             name: 'product.name'
+                        },
+                        {
+                            data: 'quantity',
+                            name: 'quantity'
+                        },
+                        {
+                            data: 'discountPrice',
+                            name: 'discountPrice'
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'created_at'
                         },
                         // {
                         //     data: 'image',
