@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BlankController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -48,5 +49,6 @@ Route::resource('/sub-category', SubCategoryController::class,['parameters' => [
 Route::resource('/product', ProductController::class)->except(['show','create']);
 Route::get('/get-Sub-category', [ProductController::class, 'getSubCategory'])->name('getSubCategory');
 Route::resource('/slider', SliderController::class)->except(['show','create']);
+Route::resource('/partner', PartnerController::class)->except(['show','create']);
 Route::resource('/order', OrderController::class)->except(['show','create','store','edit','update','destroy']);
 Route::resource('/stock', StockController::class)->except(['show','create','store','edit','update','destroy']);

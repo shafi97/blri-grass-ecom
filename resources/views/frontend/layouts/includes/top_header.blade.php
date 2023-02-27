@@ -9,11 +9,11 @@
                         <ul>
                             <li>
                                 <a href="mailto:info@webmail.com?Subject=Flower%20greetings%20to%20you">
-                                    <i class="icon-mail"></i> info@webmail.com
+                                    <i class="icon-mail"></i> info@blri-ecom.com
                                 </a>
                             </li>
                             <li>
-                                <a href="locations.html"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a>
+                                <a href="locations.html"><i class="icon-placeholder"></i> Sever, Dhaka</a>
                             </li>
                         </ul>
                     </div>

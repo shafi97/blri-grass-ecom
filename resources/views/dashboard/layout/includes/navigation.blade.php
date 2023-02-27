@@ -33,6 +33,14 @@
         </a>
     </li>
     <li>
+        <a href="{{ route('admin.partner.index') }}">
+            <div class="parent-icon">
+                <i class="fa-regular fa-images"></i>
+            </div>
+            <div class="menu-title">Partner</div>
+        </a>
+    </li>
+    <li>
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon">
                 <i class="fa-solid fa-list-ul"></i>

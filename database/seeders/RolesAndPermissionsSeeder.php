@@ -98,10 +98,17 @@ class RolesAndPermissionsSeeder extends Seeder
             ],
             'order'=>[
                 'order-manage',
+                'order-status',
                 'order-delete',
             ],
             'store'=>[
                 'store-manage',
+            ],
+            'partner'=>[
+                'partner-manage',
+                'partner-add',
+                'partner-edit',
+                'partner-delete',
             ],
 
         ];
