@@ -3,27 +3,26 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Slider</h5>
+                <h5 class="modal-title">Add Partner</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form onsubmit="ajaxStorePage(event, this, 'createModal')" action="{{ route('admin.slider.store') }}"
+            <form onsubmit="ajaxStore(event, this, 'createModal')" action="{{ route('admin.partner.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="row g-3">
                         <div class="col-md-12">
-                            <label for="image" class="form-label required">Image <span class="text-danger">width:1762px x Height:1060px</span> </label>
-                            <input type="file" name="image" class="form-control" value="{{ old('image') }}"
-                                required />
-                            @if ($errors->has('image'))
-                                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
+                            <label for="text" class="form-label">Name </label>
+                            <input type="text" name="name" class="form-control">
+                            @if ($errors->has('name'))
+                                <div class="alert alert-danger">{{ $errors->first('name') }}</div>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label for="text" class="form-label">Description </label>
-                            <textarea name="text" id="text" cols="30" rows="5" class="form-control"></textarea>
-                            @if ($errors->has('text'))
-                                <div class="alert alert-danger">{{ $errors->first('text') }}</div>
+                            <label for="image" class="form-label required">Image <span class="text-danger"></span> </label>
+                            <input type="file" name="image" class="form-control" required />
+                            @if ($errors->has('image'))
+                                <div class="alert alert-danger">{{ $errors->first('image') }}</div>
                             @endif
                         </div>
                     </div>

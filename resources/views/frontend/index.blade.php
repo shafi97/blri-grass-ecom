@@ -1258,11 +1258,13 @@
                 </div>
             </div>
             <div class="row ltn__brand-logo-active">
+                @foreach ($partners as $partner)
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
-                        <img src="{{ asset('frontend/img/brand-logo/1.png') }}" alt="Brand Logo">
+                        <img src="{{ imagePath('partner', $partner->image) }}" height="100px" alt="Brand Logo">
                     </div>
                 </div>
+                @endforeach
                 <div class="col-lg-12">
                     <div class="ltn__brand-logo-item">
                         <img src="{{ asset('frontend/img/brand-logo/2.png') }}" alt="Brand Logo">

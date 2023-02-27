@@ -17,7 +17,8 @@ class Controller extends BaseController
         $error_message = 'Don\'t have permission to perform this action',
     ) {
         if (!user()->can($permission)) {
-            return Alert::info('Info',$error_message);
+            Alert::info('Info',$error_message);
+            return redirect()->back();
             // return redirect()->back()->withInput()->withErrors($error_message);
         }
     }

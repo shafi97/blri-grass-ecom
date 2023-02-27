@@ -69,7 +69,7 @@
                                         <i class="icon-placeholder"></i>
                                     </div>
                                     <div class="footer-address-info">
-                                        <p>Brooklyn, New York, United States</p>
+                                        <p>Sever, Dhaka</p>
                                     </div>
                                 </li>
                                 <li>
@@ -85,7 +85,7 @@
                                         <i class="icon-mail"></i>
                                     </div>
                                     <div class="footer-address-info">
-                                        <p><a href="mailto:example@example.com">example@example.com</a></p>
+                                        <p><a href="mailto:example@example.com">info@blri-ecom.com</a></p>
                                     </div>
                                 </li>
                             </ul>
@@ -118,7 +118,7 @@
             <div class="row">
                 <div class="col-md-6 col-12">
                     <div class="ltn__copyright-design clearfix">
-                        <p>All Rights Reserved @ Company <span class="current-year"></span></p>
+                        <p>All Rights Reserved @ BLRI <span class="current-year"></span></p>
                     </div>
                 </div>
                 <div class="col-md-6 col-12 align-self-center">

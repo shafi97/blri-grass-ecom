@@ -60,7 +60,6 @@ class PartnerController extends Controller
         }
         try {
             Partner::create($data);
-
             return response()->json(['message' => __('app.success-message')], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => __('app.oops')], 500);
