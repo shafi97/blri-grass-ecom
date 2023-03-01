@@ -84,6 +84,12 @@ class RolesAndPermissionsSeeder extends Seeder
                 'sub-category-edit',
                 'sub-category-delete',
             ],
+            'sub-sub-category'=>[
+                'sub-sub-category-manage',
+                'sub-sub-category-add',
+                'sub-sub-category-edit',
+                'sub-sub-category-delete',
+            ],
             'product'=>[
                 'product-manage',
                 'product-add',

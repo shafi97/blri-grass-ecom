@@ -11,8 +11,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GlobalController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Setting\AppDbBackupController;
+use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Setting\Permission\RoleController;
 use App\Http\Controllers\Setting\Permission\PermissionController;
 
@@ -42,12 +44,17 @@ Route::controller(AppDbBackupController::class)->prefix('app-db-backup')->group(
     Route::post('/backup-delete/{name}/{ext}', 'deleteBackup')->name('backup.delete');
 });
 
+Route::controller(GlobalController::class)->name('global.')->group(function(){
+    Route::get('/get-Sub-category', 'getSubCategory')->name('getSubCategory');
+});
+
 Route::resource('/admin-user', AdminUserController::class,['parameters' => ['admin-user' => 'admin_user']])->except(['show','create']);
 
 Route::resource('/category', CategoryController::class)->except(['show','create']);
 Route::resource('/sub-category', SubCategoryController::class,['parameters' => ['sub-category' => 'sub_category']])->except(['show','create']);
+Route::resource('/sub-sub-category', SubSubCategoryController::class,['parameters' => ['sub-sub-category' => 'sub_sub_category']])->except(['show','create']);
 Route::resource('/product', ProductController::class)->except(['show','create']);
-Route::get('/get-Sub-category', [ProductController::class, 'getSubCategory'])->name('getSubCategory');
+// Route::get('/get-Sub-category', [ProductController::class, 'getSubCategory'])->name('getSubCategory');
 Route::resource('/slider', SliderController::class)->except(['show','create']);
 Route::resource('/partner', PartnerController::class)->except(['show','create']);
 Route::resource('/order', OrderController::class)->except(['show','create','store','edit','update','destroy']);

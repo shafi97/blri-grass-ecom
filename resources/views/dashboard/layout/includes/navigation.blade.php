@@ -58,6 +58,11 @@
                     <ion-icon name="ellipse-outline"></ion-icon>Sub Category
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.sub-sub-category.index') }}">
+                    <ion-icon name="ellipse-outline"></ion-icon>Sub Sub Category
+                </a>
+            </li>
         </ul>
     </li>
     {{-- Product --}}

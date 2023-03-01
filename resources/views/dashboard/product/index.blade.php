@@ -1,9 +1,6 @@
 @extends('dashboard.layout.app')
 @section('title', 'Product')
 @section('content')
-    @push('custom_css')
-        @include('dashboard.layout.includes.data_table_css')
-    @endpush
     <!-- start page content wrapper-->
     <div class="page-content-wrapper">
         <!-- start page content-->
@@ -66,8 +63,6 @@
         @include('dashboard.product.create')
     @endcan
     @push('custom_scripts')
-        @include('dashboard.layout.includes.data_table_js')
-
         <script>
             $(document).ready(function() {
                 var i = 1;
@@ -177,7 +172,7 @@
         <script>
             $('#category_id').change(function() {
                 $.ajax({
-                    url: '{{ route('admin.getSubCategory') }}',
+                    url: '{{ route('admin.global.getSubCategory') }}',
                     method: 'get',
                     data: {
                         category_id: $(this).val(),
